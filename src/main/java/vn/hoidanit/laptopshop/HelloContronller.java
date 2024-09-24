@@ -7,7 +7,17 @@ import org.springframework.web.bind.annotation.RestController;
 public class HelloContronller {
     @GetMapping("/")
     public String index() {
-        return "Nguyễn Duy Kiên sẽ thực tập IT vào tháng 3";
+        return "xin chào";
+    }
+
+    @GetMapping("/user")
+    public String UserPage() {
+        return "Only user";
+    }
+
+    @GetMapping("/admin")
+    public String Adminpage() {
+        return "Only admin";
     }
 
 }
