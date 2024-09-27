@@ -21,10 +21,10 @@
 
         <body>
             <div>
-                <h2>Nguyen Nguyen JSP</h2>
+                <h2>Congratulation</h2>
                 <button class="btn btn-warning">Click here</button>
                 <h2>
-                    ${kien};
+                    ${kien}
                 </h2>
             </div>
         </body>
