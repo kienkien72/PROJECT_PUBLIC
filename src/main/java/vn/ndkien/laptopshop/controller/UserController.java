@@ -22,6 +22,11 @@ public class UserController {
         model.addAttribute("kien", test);
         return "hello";
     }
+
+    @RequestMapping("/admin/user")
+    public String userInfo(Model model) {
+        return "admin/user/create";
+    }
 }
 
 // @RestController
