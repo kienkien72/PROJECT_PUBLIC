@@ -38,29 +38,18 @@
                         </thead>
 
                         <tbody>
-                            <tr>
-                                <th>1</th>
-                                <td>Duy Kien</td>
-                                <td>ndkien</td>
-                                <td>
-                                    <button class="btn btn-success">View</button>
-                                    <button class="btn btn-warning mx-2">Update</button>
-                                    <button class="btn btn-danger">Delete</button>
-                                </td>
-                            </tr>
-                        </tbody>
-
-                        <tbody>
-                            <tr>
-                                <th>1</th>
-                                <td>Duy Kien</td>
-                                <td>ndkien</td>
-                                <td>
-                                    <button class="btn btn-success">View</button>
-                                    <button class="btn btn-warning mx-2">Update</button>
-                                    <button class="btn btn-danger">Delete</button>
-                                </td>
-                            </tr>
+                            <c:forEach var="user" items="${users1}">
+                                <tr>
+                                    <th>${user.id}</th>
+                                    <td>${user.fullname} </td>
+                                    <td>${user.email} </td>
+                                    <td>
+                                        <button class="btn btn-success">View</button>
+                                        <button class="btn btn-warning mx-2">Update</button>
+                                        <button class="btn btn-danger">Delete</button>
+                                    </td>
+                                </tr>
+                            </c:forEach>
                         </tbody>
                     </table>
                 </div>

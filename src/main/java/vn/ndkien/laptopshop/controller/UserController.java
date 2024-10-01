@@ -26,26 +26,34 @@ public class UserController {
     public String getHomePage(Model model) {
         // 3. Lấy tất cả danh sách người dùng có email là ndke@gmail.com
         // List<User> listUserEmail =this.userService.getAllUserEmail("ndke@gmail.com");
-
+        // 2. Lấy tất cả danh sách trong database
+        List<User> users = this.userService.getAllUser(null);
         model.addAttribute("kien", "test");
         return "hello";
     }
 
-    @RequestMapping("/admin/user/create")
+    @RequestMapping("/admin/user")
     public String getUserPage(Model model) {
+        List<User> users = this.userService.getAllUser(null);
+        // Truyền data qua view trong đó:
+        // users :giá trị gắn vào
+        // users1: giá trị nhận được bên View
+        model.addAttribute("users1", users);
+        return "admin/user/table-user";
+    }
+
+    @RequestMapping("/admin/user/create") // Get
+    public String getCreateUserPage(Model model) {
         model.addAttribute("newUser", new User());
         // Lấy từ file create.jsp trong user folder admin
         return "admin/user/create";
     }
 
-    @RequestMapping(value = "/admin/user", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/user/create", method = RequestMethod.POST)
     public String createUserPage(Model model, @ModelAttribute("newUser") User ndkien) {
-        // 2. Lấy tất cả danh sách trong database
-        List<User> arrUser = this.userService.getAllUser(null);
 
-        System.out.println("kien" + ndkien);
         // 1. Gọi hàm service để lưu vào db
         this.userService.handleUser(ndkien);
-        return "admin/user/table-user";
+        return "redirect:/admin/user";
     }
 }
