@@ -38,13 +38,15 @@
                         </thead>
 
                         <tbody>
+
                             <c:forEach var="user" items="${users1}">
+                                <!-- // Var= name sẽ tương ứng với biến trong service -->
                                 <tr>
                                     <th>${user.id}</th>
                                     <td>${user.fullname} </td>
                                     <td>${user.email} </td>
                                     <td>
-                                        <button class="btn btn-success">View</button>
+                                        <a href="/admin/user/${user.id}" class="btn btn-success">View</a>
                                         <button class="btn btn-warning mx-2">Update</button>
                                         <button class="btn btn-danger">Delete</button>
                                     </td>

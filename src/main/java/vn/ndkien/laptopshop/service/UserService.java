@@ -1,6 +1,7 @@
 package vn.ndkien.laptopshop.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -28,8 +29,8 @@ public class UserService {
         return this.userRepository.findAll();
     }
 
-    // 3. Lấy danh sách tất cả người dùng bởi email
-    public List<User> getAllUserEmail(String email) {
-        return this.userRepository.findByEmail(email);
+    // 3. Lấy danh sách tất cả người dùng bởi id
+    public User getOneUserId(long id) {
+        return this.userRepository.findById(id);
     }
 }
