@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 // import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 // import org.springframework.web.bind.annotation.RestController;
@@ -24,6 +25,7 @@ public class UserController {
         this.userService = userService;
     }
 
+    // Trang chủ
     @RequestMapping("/")
     public String getHomePage(Model model) {
         // 3. Lấy tất cả danh sách người dùng có email là ndke@gmail.com
@@ -34,9 +36,9 @@ public class UserController {
         return "hello";
     }
 
+    // 2. Lấy danh sách tất cả người dùng
     @RequestMapping("/admin/user")
     public String getUserPage(Model model) {
-        // Lấy tất cả dữ liệu người dùng
         List<User> users = this.userService.getAllUser(null);
         // Truyền data qua view trong đó:
         // users :giá trị gắn vào
@@ -45,6 +47,7 @@ public class UserController {
         return "admin/user/table-user";
     }
 
+    // 3. Xem chi tiết thông tin 1 người dùng
     @RequestMapping("/admin/user/{id}") // Get
     public String getUserDetailPage(Model model, @PathVariable long id) {
         User user = this.userService.getOneUserId(id);
@@ -55,6 +58,7 @@ public class UserController {
         return "admin/user/show";
     }
 
+    // Form tạo người dùng
     @RequestMapping("/admin/user/create") // Get
     public String getCreateUserPage(Model model) {
         model.addAttribute("newUser", new User());
@@ -62,12 +66,36 @@ public class UserController {
         return "admin/user/create";
     }
 
+    // 1. Lưu dữ liệu người dùng khi nhập form
     @RequestMapping(value = "/admin/user/create", method = RequestMethod.POST)
+    // @ModelAttribute: Lấy giá trị từ View
     public String createUserPage(Model model, @ModelAttribute("newUser") User ndkien) {
-
-        // 1. Gọi hàm service để lưu vào db
-        this.userService.handleUser(ndkien);
+        this.userService.handleSaveUser(ndkien);
         // redirect nghĩa là sau khi đã lưu db thì sẽ vào đường link/admin/user
         return "redirect:/admin/user";
+    }
+
+    // Lấy thông tin người dùng cần sửa
+    @RequestMapping(value = "/admin/user/update/{id}")
+    public String getUpdateUserPage(Model model, @PathVariable long id) {
+        User currentUser = this.userService.getOneUserId(id);
+        model.addAttribute("newUser", currentUser);
+        return "admin/user/update";
+
+    }
+
+    // Định nghĩa action bên view
+    @PostMapping("/admin/user/update")
+    public String postUpdateUser(Model model, @ModelAttribute("newUser") User ndkien) {
+        User currentUser = this.userService.getOneUserId(ndkien.getId());
+        if (currentUser != null) {
+            currentUser.setAddress(ndkien.getAddress());
+            currentUser.setFullname(ndkien.getFullname());
+            currentUser.setPhone(ndkien.getPhone());
+
+            this.userService.handleSaveUser(ndkien);
+        }
+        return "redirect:/admin/user";
+
     }
 }

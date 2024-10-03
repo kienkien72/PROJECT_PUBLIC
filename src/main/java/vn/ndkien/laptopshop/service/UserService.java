@@ -18,7 +18,7 @@ public class UserService {
     }
 
     // 1. Lưu dữ liệu người dùng khi nhập form
-    public User handleUser(User user) {
+    public User handleSaveUser(User user) {
         User ndkien = this.userRepository.save(user);
         System.out.println(ndkien);
         return ndkien;
