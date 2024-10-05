@@ -33,7 +33,7 @@
                                 <div class="mb-3">
                                     <label class="form-label">Email</label>
                                     <!-- disabled="true": Không thể sửa đổi  -->
-                                    <form:input type="email" class="form-control" path="email" />
+                                    <form:input type="email" class="form-control" path="email" disabled="true" />
                                 </div>
 
 

@@ -33,4 +33,9 @@ public class UserService {
     public User getOneUserId(long id) {
         return this.userRepository.findById(id);
     }
+
+    // 4. Xoá người dùng theo id
+    public void deleteUserId(long id) {
+        this.userRepository.deleteById(id);
+    }
 }

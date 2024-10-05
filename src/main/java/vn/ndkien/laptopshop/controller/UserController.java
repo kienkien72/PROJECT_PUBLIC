@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import vn.ndkien.laptopshop.domain.User;
 import vn.ndkien.laptopshop.repository.UserRepository;
 import vn.ndkien.laptopshop.service.UserService;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class UserController {
@@ -93,9 +95,23 @@ public class UserController {
             currentUser.setFullname(ndkien.getFullname());
             currentUser.setPhone(ndkien.getPhone());
 
-            this.userService.handleSaveUser(ndkien);
+            this.userService.handleSaveUser(currentUser);
         }
         return "redirect:/admin/user";
 
+    }
+
+    @GetMapping("admin/user/delete/{id}")
+    public String getDeleteUserPage(Model model, @PathVariable long id) {
+        model.addAttribute("newUser", new User());
+        model.addAttribute("id", id);
+        return "admin/user/delete";
+    }
+
+    @PostMapping("/admin/user/delete")
+    public String postDeleteUser(Model model, @ModelAttribute("newUser") User kien) {
+        this.userService.deleteUserId(kien.getId());
+        // Vì dùng hàm void trong Service
+        return "redirect:/admin/user";
     }
 }

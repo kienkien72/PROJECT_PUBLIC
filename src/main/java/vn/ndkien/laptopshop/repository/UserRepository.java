@@ -9,6 +9,8 @@ import vn.ndkien.laptopshop.domain.User;
 public interface UserRepository extends JpaRepository<User, Long> {
     User save(User ndkien);
 
+    void deleteById(long id);
+
     // Định nghĩa về các câu query
     // Trả về list danh sách người dùng
     List<User> findByEmail(String email);
