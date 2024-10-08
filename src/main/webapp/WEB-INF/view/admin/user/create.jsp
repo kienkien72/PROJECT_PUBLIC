@@ -7,7 +7,9 @@
             <head>
                 <meta charset="UTF-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>Document</title>
+                <link href="/css/styles.css" rel="stylesheet" />
+                <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+                <title>Create</title>
                 <!-- Latest compiled and minified CSS -->
                 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -18,44 +20,66 @@
                 <!-- <link rel="stylesheet" href="css/demo.css"> -->
             </head>
 
-            <body>
-                <div class="container mt-3">
-                    <div class="row">
-                        <div class="col-md-6 col-12 mx-auto">
-                            <h2 class=" ms-3">Create User</h2>
-                            <hr>
-                            <form:form class=" ms-3" method="post" action="/admin/user/create" modelAttribute="newUser">
-                                <div class="mb-3">
-                                    <label class="form-label">Email</label>
-                                    <form:input type="email" class="form-control" path="email" />
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label">Password</label>
-                                    <form:input type="password" class="form-control" path="password" />
-                                </div>
+            <body class="sb-nav-fixed">
+                <jsp:include page="../layout/header.jsp" />
+                <div id="layoutSidenav">
+                    <jsp:include page="../layout/sidebar.jsp" />
+                    <div id="layoutSidenav_content">
+                        <main>
+                            <div class="container-fluid px-4">
+                                <h1 class="mt-4">Create New User</h1>
+                                <div>
+                                    <div class="container mt-3">
+                                        <div class="row">
+                                            <div class="col-md-6 col-12 mx-auto">
+                                                <h2 class=" ms-3">Create User</h2>
+                                                <hr>
+                                                <form:form class=" ms-3" method="post" action="/admin/user/create"
+                                                    modelAttribute="newUser">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Email</label>
+                                                        <form:input type="email" class="form-control" path="email" />
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Password</label>
+                                                        <form:input type="password" class="form-control"
+                                                            path="password" />
+                                                    </div>
 
-                                <div class="mb-3">
-                                    <label class="form-label">Phone number</label>
-                                    <form:input type="number" class="form-control" path="phone" />
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Phone number</label>
+                                                        <form:input type="number" class="form-control" path="phone" />
+                                                    </div>
+                                                    <div class="mb-3 ">
+                                                        <label class="form-label">Full name</label>
+                                                        <form:input type="text" class="form-control" path="fullname" />
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Address</label>
+                                                        <form:input type="text" class="form-control" path="address" />
+                                                    </div>
+                                                    <div class="mb-3 form-check">
+                                                        <input type="checkbox" class="form-check-input"
+                                                            id="exampleCheck1">
+                                                        <label class="form-check-label" for="exampleCheck1">Check me
+                                                            out</label>
+                                                    </div>
+                                                    <button type="submit" class="btn btn-primary">Create</button>
+                                                </form:form>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </div>
-                                <div class="mb-3 ">
-                                    <label class="form-label">Full name</label>
-                                    <form:input type="text" class="form-control" path="fullname" />
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label">Address</label>
-                                    <form:input type="text" class="form-control" path="address" />
-                                </div>
-                                <div class="mb-3 form-check">
-                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                                </div>
-                                <button type="submit" class="btn btn-primary">Create</button>
-                            </form:form>
-                        </div>
+                            </div>
+                        </main>
+                        <jsp:include page="../layout/footer.jsp" />
                     </div>
                 </div>
-
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+                    crossorigin="anonymous"></script>
+                <script src="js/scripts.js"></script>
             </body>
+
 
             </html>
