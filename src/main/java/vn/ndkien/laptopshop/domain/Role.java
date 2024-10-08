@@ -1,10 +1,13 @@
 package vn.ndkien.laptopshop.domain;
 
+import java.util.List;
+
 import jakarta.annotation.Generated;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -15,6 +18,10 @@ public class Role {
     private long id;
     private String name;
     private String description;
+
+    // Role one -> to many - users
+    @OneToMany(mappedBy = "role") // MappedBy và tên trong " " sẽ giống với bên kia khai báo
+    private List<User> users;
 
     public Role(long id, String name, String description) {
         this.id = id;
