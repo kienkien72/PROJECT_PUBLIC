@@ -72,7 +72,7 @@ public class UserController {
     @RequestMapping(value = "/admin/user/create", method = RequestMethod.POST)
     // @ModelAttribute: Lấy giá trị từ View
     public String createUserPage(Model model, @ModelAttribute("newUser") User ndkien) {
-        this.userService.handleSaveUser(ndkien);
+        // this.userService.handleSaveUser(ndkien);
         // redirect nghĩa là sau khi đã lưu db thì sẽ vào đường link/admin/user
         return "redirect:/admin/user";
     }

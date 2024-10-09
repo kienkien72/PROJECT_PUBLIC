@@ -23,10 +23,9 @@ public class Role {
     @OneToMany(mappedBy = "role") // MappedBy và tên trong " " sẽ giống với bên kia khai báo
     private List<User> users;
 
-    public Role(long id, String name, String description) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
+    @Override
+    public String toString() {
+        return "Role [id=" + id + ", name=" + name + ", description=" + description + "]";
     }
 
     public long getId() {

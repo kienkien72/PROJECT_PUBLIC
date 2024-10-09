@@ -24,6 +24,8 @@ public class User {
     private String address;
     private String phone;
 
+    private String avatar;
+
     // Role id
     // User many -> to one - role
     @ManyToOne
@@ -39,7 +41,31 @@ public class User {
     @Override
     public String toString() {
         return "User [id=" + id + ", email=" + email + ", password=" + password + ", fullname=" + fullname
-                + ", address=" + address + ", phone=" + phone + "]";
+                + ", address=" + address + ", phone=" + phone + ", avatar=" + avatar + "]";
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public List<Order> getOrder() {
+        return order;
+    }
+
+    public void setOrder(List<Order> order) {
+        this.order = order;
     }
 
     public void setId(long id) {
