@@ -18,6 +18,30 @@
 
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
                 <!-- <link rel="stylesheet" href="css/demo.css"> -->
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+                <!-- Thêm ảnh vào file -->
+                <script>
+                    // Đảm bảo rằng mã JavaScript chỉ được thực thi khi toàn bộ tài liệu HTML đã được tải hoàn tất
+                    $(document).ready(() => {
+                        const avatarFile = $("#avatarFile");
+                        // Lắng nghe sự kiện "change" trên input file (#avatarFile).
+                        //  Khi người dùng chọn một tệp, sự kiện "change" sẽ kích hoạt
+                        avatarFile.change(function (e) {
+                            // Tạo một URL tạm thời cho file ảnh mà người dùng đã chọn từ e.target.files[0] 
+                            // (file đầu tiên trong danh sách tệp).
+                            const imgURL = URL.createObjectURL(e.target.files[0]);
+                            // Gán URL tạm thời này vào thuộc tính src của thẻ img,
+                            //  làm cho ảnh được chọn hiển thị trong phần preview
+                            $("#avatarPreview").attr("src", imgURL);
+                            // Thay đổi CSS của thẻ img từ display: none thành 
+                            // display: block, giúp hình ảnh được hiển thị trên màn hình
+                            $("#avatarPreview").css({ "display": "block" });
+                        });
+                    });
+                </script>
+
+
             </head>
 
             <body class="sb-nav-fixed">
@@ -34,37 +58,53 @@
                                             <div class="col-md-6 col-12 mx-auto">
                                                 <h2 class=" ms-3">Create User</h2>
                                                 <hr>
-                                                <form:form class=" ms-3" method="post" action="/admin/user/create"
+                                                <form:form class="row" method="post" action="/admin/user/create"
                                                     modelAttribute="newUser">
-                                                    <div class="mb-3">
+                                                    <div class="mb-3 col-12 col-md-6">
                                                         <label class="form-label">Email</label>
                                                         <form:input type="email" class="form-control" path="email" />
                                                     </div>
-                                                    <div class="mb-3">
+                                                    <div class="mb-3  col-12 col-md-6">
                                                         <label class="form-label">Password</label>
                                                         <form:input type="password" class="form-control"
                                                             path="password" />
                                                     </div>
 
-                                                    <div class="mb-3">
+                                                    <div class="mb-3 col-12 col-md-6">
                                                         <label class="form-label">Phone number</label>
                                                         <form:input type="number" class="form-control" path="phone" />
                                                     </div>
-                                                    <div class="mb-3 ">
+                                                    <div class="mb-3 col-12 col-md-6">
                                                         <label class="form-label">Full name</label>
                                                         <form:input type="text" class="form-control" path="fullname" />
                                                     </div>
-                                                    <div class="mb-3">
+                                                    <div class="mb-3 col-12">
                                                         <label class="form-label">Address</label>
                                                         <form:input type="text" class="form-control" path="address" />
                                                     </div>
-                                                    <div class="mb-3 form-check">
-                                                        <input type="checkbox" class="form-check-input"
-                                                            id="exampleCheck1">
-                                                        <label class="form-check-label" for="exampleCheck1">Check me
-                                                            out</label>
+
+                                                    <div class="mb-3 col-12 col-md-6">
+                                                        <label class="form-label">Role:</label>
+                                                        <select class="form-select "
+                                                            aria-label="Default select example">Role:
+                                                            <option value="1">Admin</option>
+                                                            <option value="2">User</option>
+                                                        </select>
                                                     </div>
-                                                    <button type="submit" class="btn btn-primary">Create</button>
+                                                    <div class="mb-3 col-12 col-md-6 ">
+                                                        <label for="formFile" class="form-label">Avatar:</label>
+                                                        <input class="form-control" type="file" id="avatarFile"
+                                                            accept=".png,.jpg, .jpeg">
+                                                    </div>
+                                                    <div class="col-12 mb-3">
+                                                        <!-- Ban đầu chưa có ảnh thì ảnh ko hiển thị -->
+                                                        <img style="max-height: 250px ; display: none;"
+                                                            alt="avatar preview" id="avatarPreview">
+                                                    </div>
+
+                                                    <div class="col-12 mb-5">
+                                                        <button type="submit" class="btn btn-primary">Create</button>
+                                                    </div>
                                                 </form:form>
                                             </div>
                                         </div>
