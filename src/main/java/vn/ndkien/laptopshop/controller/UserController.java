@@ -1,5 +1,9 @@
 package vn.ndkien.laptopshop.controller;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,16 +19,23 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import vn.ndkien.laptopshop.domain.User;
 import vn.ndkien.laptopshop.repository.UserRepository;
+import vn.ndkien.laptopshop.service.UploadService;
 import vn.ndkien.laptopshop.service.UserService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+
+import jakarta.servlet.ServletContext;
 
 @Controller
 public class UserController {
     private final UserService userService;
+    private final UploadService uploadService;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, UploadService uploadService) {
         this.userService = userService;
+        this.uploadService = uploadService;
+
     }
 
     // Trang chủ
@@ -69,10 +80,15 @@ public class UserController {
     }
 
     // 1. Lưu dữ liệu người dùng khi nhập form
-    @RequestMapping(value = "/admin/user/create", method = RequestMethod.POST)
+    @PostMapping(value = "/admin/user/create")
     // @ModelAttribute: Lấy giá trị từ View
-    public String createUserPage(Model model, @ModelAttribute("newUser") User ndkien) {
+    public String createUserPage(Model model,
+            @ModelAttribute("newUser") User ndkien,
+            @RequestParam("fileImage") MultipartFile file) {
+
+        String avatar = this.uploadService.handleSaveUploadFile(file, "avatar");
         // this.userService.handleSaveUser(ndkien);
+
         // redirect nghĩa là sau khi đã lưu db thì sẽ vào đường link/admin/user
         return "redirect:/admin/user";
     }

@@ -59,7 +59,7 @@
                                                 <h2 class=" ms-3">Create User</h2>
                                                 <hr>
                                                 <form:form class="row" method="post" action="/admin/user/create"
-                                                    modelAttribute="newUser">
+                                                    modelAttribute="newUser" enctype="multipart/form-data">
                                                     <div class="mb-3 col-12 col-md-6">
                                                         <label class="form-label">Email</label>
                                                         <form:input type="email" class="form-control" path="email" />
@@ -95,7 +95,7 @@
                                                     <div class="mb-3 col-12 col-md-6 ">
                                                         <label for="formFile" class="form-label">Avatar:</label>
                                                         <input class="form-control" type="file" id="avatarFile"
-                                                            accept=".png,.jpg, .jpeg">
+                                                            accept=".png,.jpg, .jpeg" name="fileImage">
                                                     </div>
                                                     <div class="col-12 mb-3">
                                                         <!-- Ban đầu chưa có ảnh thì ảnh ko hiển thị -->
