@@ -1,12 +1,9 @@
 package vn.ndkien.laptopshop.controller;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,26 +12,26 @@ import org.springframework.web.bind.annotation.PostMapping;
 // import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 // import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import vn.ndkien.laptopshop.domain.User;
-import vn.ndkien.laptopshop.repository.UserRepository;
+
 import vn.ndkien.laptopshop.service.UploadService;
 import vn.ndkien.laptopshop.service.UserService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import jakarta.servlet.ServletContext;
-
 @Controller
 public class UserController {
     private final UserService userService;
     private final UploadService uploadService;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserController(UserService userService, UploadService uploadService) {
+    public UserController(UserService userService, UploadService uploadService,
+            PasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.uploadService = uploadService;
+        this.passwordEncoder = passwordEncoder;
 
     }
 
@@ -87,7 +84,18 @@ public class UserController {
             @RequestParam("fileImage") MultipartFile file) {
 
         String avatar = this.uploadService.handleSaveUploadFile(file, "avatar");
-        // this.userService.handleSaveUser(ndkien);
+        String hashPassword = this.passwordEncoder.encode(ndkien.getPassword());
+
+        // Đặt lại ava và password sau khi xử lí
+        ndkien.setAvatar(avatar);
+        ndkien.setPassword(hashPassword);
+
+        // Save Role_id: Lưu dưới dạng Id
+        // ndkien.getRole():trả ra đối tượng Role
+        // .getName(): Từ đối tượng đã tìm ra, lấy hàm getName
+        ndkien.setRole(this.userService.getRoleByName(ndkien.getRole().getName()));
+
+        this.userService.handleSaveUser(ndkien);
 
         // redirect nghĩa là sau khi đã lưu db thì sẽ vào đường link/admin/user
         return "redirect:/admin/user";
