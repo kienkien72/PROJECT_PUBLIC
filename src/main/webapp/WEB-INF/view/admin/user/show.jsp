@@ -48,6 +48,8 @@
                                                 <li class="list-group-item">Fullname: ${kien.fullname} </li>
                                                 <li class="list-group-item">Address: ${kien.address} </li>
                                                 <li class="list-group-item">Phone: ${kien.phone} </li>
+                                                <li class="list-group-item">Role: ${kien.role.name} </li>
+                                                <li class="list-group-item">Avatar: ${kien.avatar} </li>
                                             </ul>
                                         </div>
                                         <a href="/admin/user" class="btn btn-success mt-3">Back</a>

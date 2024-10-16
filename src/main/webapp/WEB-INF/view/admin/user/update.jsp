@@ -49,6 +49,10 @@
                                     <label class="form-label">Address</label>
                                     <form:input type="text" class="form-control" path="address" />
                                 </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Role</label>
+                                    <form:input type="text" class="form-control" path="role" />
+                                </div>
                                 <div class="mb-3 form-check">
                                     <input type="checkbox" class="form-check-input" id="exampleCheck1">
                                     <label class="form-check-label" for="exampleCheck1">Check me out</label>
