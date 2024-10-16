@@ -1,4 +1,4 @@
-package vn.ndkien.laptopshop.controller;
+package vn.ndkien.laptopshop.controller.admin;
 
 import java.util.List;
 import java.util.Optional;
