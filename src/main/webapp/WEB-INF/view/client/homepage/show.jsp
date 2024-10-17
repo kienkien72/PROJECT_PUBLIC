@@ -42,7 +42,7 @@
             <!-- Spinner End -->
 
 
-
+            <!-- Header -->
             <jsp:include page="../layout/header.jsp" />
 
 
@@ -69,9 +69,11 @@
             <!-- Modal Search End -->
 
 
+            <!-- Banner -->
             <jsp:include page="../layout/banner.jsp" />
 
 
+            <!-- Feature -->
             <jsp:include page="../layout/feature.jsp" />
 
 
@@ -556,6 +558,8 @@
             </div>
             <!-- Fruits Shop End-->
 
+
+            <!-- Footer -->
             <jsp:include page="../layout/footer.jsp" />
 
 
