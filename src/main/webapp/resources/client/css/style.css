@@ -78,7 +78,7 @@
 .fixed-top {
     transition: 0.5s;
     background: var(--bs-white);
-    border: 0;
+    border: 0;   
 }
 
 .topbar {
@@ -178,10 +178,12 @@
 
 /*** Hero Header ***/
 .hero-header {
-    background: linear-gradient(rgba(248, 223, 173, 0.1), rgba(248, 223, 173, 0.1)), url(../img/hero-img.jpg);
+
+    background:linear-gradient(rgba(248, 204, 173, 0.1), rgba(248, 177, 173, 0.1)),url("../img/hero-img.jpg");
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
+    object-fit: cover;
 }
 
 .carousel-item {
