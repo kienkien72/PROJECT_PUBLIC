@@ -43,6 +43,10 @@ public class Product {
         this.target = target;
     }
 
+    public Product() {
+        // TODO Auto-generated constructor stub
+    }
+
     public long getId() {
         return id;
     }
