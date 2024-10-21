@@ -25,6 +25,9 @@ public class UploadService {
     // String targetFolder: Thư mục đích mà file sẽ được lưu
     public String handleSaveUploadFile(MultipartFile file, String targetFolder) {
 
+        if (file.isEmpty()) {
+            return " ";
+        }
         // Đường link dẫn đến lưu file
         // getRealPath trả về đường dẫn tuyệt đối trên hệ thống file của server
         // Ví dụ: C:/project/resources/images
