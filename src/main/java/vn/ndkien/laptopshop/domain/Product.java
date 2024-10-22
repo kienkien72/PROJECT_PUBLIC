@@ -8,6 +8,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "products")
@@ -15,6 +17,9 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @NotNull
+    @Size(min = 2, message = "Hãy nhập tên sản phẩm")
     private String name;
     private double price;
     private String image;
@@ -25,12 +30,14 @@ public class Product {
     private String factory;
     private String target;
 
+    private String avatar;
+
     // OrderDetail
     @OneToMany(mappedBy = "product")
     private List<OrderDetail> orderDetail;
 
     public Product(long id, String name, double price, String image, String detailDesc, String shortDesc, long quantity,
-            long sold, String factory, String target) {
+            long sold, String factory, String target, String avatar) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -41,6 +48,7 @@ public class Product {
         this.sold = sold;
         this.factory = factory;
         this.target = target;
+        this.avatar = avatar;
     }
 
     public Product() {
@@ -53,6 +61,14 @@ public class Product {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     public String getName() {

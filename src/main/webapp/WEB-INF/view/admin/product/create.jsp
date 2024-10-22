@@ -61,8 +61,14 @@
                                                 <form:form class="row" method="post" action="/admin/product/create"
                                                     modelAttribute="newProduct" enctype="multipart/form-data">
                                                     <div class="mb-3 col-12 col-md-6">
+                                                        <c:set var="errorName">
+                                                            <form:errors path="name" cssClass="invalid-feedback" />
+                                                        </c:set>
                                                         <label class="form-label">Name</label>
-                                                        <form:input type="text" class="form-control" path="name" />
+                                                        <form:input type="text"
+                                                            class="form-control ${not empty errorName ? 'is-invalid':''}"
+                                                            path="name" />
+                                                        ${errorName}
                                                     </div>
                                                     <div class="mb-3  col-12 col-md-6">
                                                         <label class="form-label">Price</label>
@@ -104,9 +110,9 @@
 
                                                     </div>
                                                     <div class="mb-3 col-12 col-md-6 ">
-                                                        <label for="formFile" class="form-label">Image</label>
-                                                        <input class="form-control" type="file"
-                                                            accept=".png,.jpg, .jpeg" name="fileImage">
+                                                        <label for="formFile" class="form-label">Avatar:</label>
+                                                        <input class="form-control" type="file" id="avatarFile"
+                                                            accept=".png,.jpg, .jpeg" name="productFile">
                                                     </div>
                                                     <div class="col-12 mb-3">
                                                         <!-- Ban đầu chưa có ảnh thì ảnh ko hiển thị -->
