@@ -54,7 +54,22 @@
 
                                             <tbody>
 
+                                                <c:forEach var="product" items="${product1}">
+                                                    <!-- // Var= name sẽ tương ứng với biến trong service -->
+                                                    <tr>
+                                                        <th>${product.id}</th>
+                                                        <td>${product.name} </td>
+                                                        <td>${product.price} </td>
+                                                        <td>${product.factory}</td>
 
+
+                                                        <td>
+                                                            <a href="#" class="btn btn-success">View</a>
+                                                            <a href="#" class="btn btn-warning mx-2">Update</a>
+                                                            <a href="#" class="btn btn-danger">Delete</a>
+                                                        </td>
+                                                    </tr>
+                                                </c:forEach>
                                             </tbody>
                                         </table>
                                     </div>

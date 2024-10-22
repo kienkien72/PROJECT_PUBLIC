@@ -58,11 +58,11 @@
                                             <div class="col-md-6 col-12 mx-auto">
                                                 <h2 class=" ms-3">Create Product</h2>
                                                 <hr>
-                                                <form:form class="row" method="post" action="/admin/user/create"
+                                                <form:form class="row" method="post" action="/admin/product/create"
                                                     modelAttribute="newProduct" enctype="multipart/form-data">
                                                     <div class="mb-3 col-12 col-md-6">
                                                         <label class="form-label">Name</label>
-                                                        <form:input type="email" class="form-control" path="name" />
+                                                        <form:input type="text" class="form-control" path="name" />
                                                     </div>
                                                     <div class="mb-3  col-12 col-md-6">
                                                         <label class="form-label">Price</label>
@@ -71,7 +71,7 @@
 
                                                     <div class="mb-3 col-12 ">
                                                         <label class="form-label">Detail description</label>
-                                                        <form:input type="number" class="form-control"
+                                                        <form:input type="text" class="form-control"
                                                             path="detailDesc" />
                                                     </div>
                                                     <div class="mb-3 col-12 col-md-6">
@@ -87,10 +87,10 @@
                                                         <label class="form-label">Factory</label>
 
                                                         <form:select class="form-select" path="factory">
-                                                            <form:option value="ADMIN">Macbook</form:option>
-                                                            <form:option value="USER">Window</form:option>
-                                                            <form:option value="USER">Linus</form:option>
-                                                            <form:option value="USER">Lenovo</form:option>
+                                                            <form:option value="Macbook">Macbook</form:option>
+                                                            <form:option value="Window">Window</form:option>
+                                                            <form:option value="Linus">Linus</form:option>
+                                                            <form:option value="Lenovo">Lenovo</form:option>
                                                         </form:select>
 
                                                     </div>
@@ -98,8 +98,8 @@
                                                         <label class="form-label">Target</label>
 
                                                         <form:select class="form-select" path="target">
-                                                            <form:option value="ADMIN">Gaming</form:option>
-                                                            <form:option value="USER">Coding</form:option>
+                                                            <form:option value="Gaming">Gaming</form:option>
+                                                            <form:option value="Coding">Coding</form:option>
                                                         </form:select>
 
                                                     </div>
