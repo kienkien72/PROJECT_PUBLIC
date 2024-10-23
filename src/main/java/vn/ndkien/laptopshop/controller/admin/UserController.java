@@ -62,7 +62,7 @@ public class UserController {
     }
 
     // 3. Xem chi tiết thông tin 1 người dùng
-    @RequestMapping("/admin/user/{id}") // Get
+    @GetMapping("/admin/user/{id}") // Get
     public String getUserDetailPage(Model model, @PathVariable long id) {
         User user = this.userService.getOneUserId(id);
         // kien : Giá trị nhận được bên View
@@ -139,6 +139,7 @@ public class UserController {
 
     }
 
+    // Xoá user
     @GetMapping("admin/user/delete/{id}")
     public String getDeleteUserPage(Model model, @PathVariable long id) {
         model.addAttribute("newUser", new User());

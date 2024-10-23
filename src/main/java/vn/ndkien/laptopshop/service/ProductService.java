@@ -1,6 +1,7 @@
 package vn.ndkien.laptopshop.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -26,4 +27,7 @@ public class ProductService {
         return this.productRepository.findAll();
     }
 
+    public Product getInfoProduct(long id) {
+        return this.productRepository.findById(id);
+    }
 }

@@ -31,7 +31,7 @@ public class UserService {
         return this.userRepository.findAll();
     }
 
-    // 3. Lấy danh sách tất cả người dùng bởi id
+    // 3. Lấy danh sách người dùng bởi id
     public User getOneUserId(long id) {
         return this.userRepository.findById(id);
     }

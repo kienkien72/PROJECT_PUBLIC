@@ -1,6 +1,7 @@
 package vn.ndkien.laptopshop.controller.admin;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -64,6 +66,15 @@ public class ProductController {
         List<Product> products = this.productService.getAllProduct(null);
         model.addAttribute("product1", products);
         return "admin/product/table-product";
+    }
+
+    // Xem Thông tin chi tiết một sản phẩm
+    @GetMapping("/admin/product/{id}")
+    public String getProductId(Model model, @PathVariable long id) {
+        Product product = this.productService.getInfoProduct(id);
+        model.addAttribute("infoPr", product);
+        model.addAttribute("id", id);
+        return "admin/product/show";
     }
 
 }
