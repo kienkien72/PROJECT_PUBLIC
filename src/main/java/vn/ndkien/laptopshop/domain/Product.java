@@ -2,6 +2,7 @@ package vn.ndkien.laptopshop.domain;
 
 import java.util.List;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,6 +24,8 @@ public class Product {
     private String name;
     private double price;
     private String image;
+
+    @Column(columnDefinition = "MEDIUMTEXT")
     private String detailDesc;
     private String shortDesc;
     private long quantity;

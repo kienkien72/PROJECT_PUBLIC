@@ -44,7 +44,7 @@ public class ProductController {
     public String createProductPage(Model model,
             @ModelAttribute("newProduct") @Valid Product product,
             BindingResult newProductBindingResult,
-            @RequestParam("productFile") MultipartFile file) {
+            @RequestParam("fileImage") MultipartFile file) {
         List<FieldError> errors = newProductBindingResult.getFieldErrors();
         for (FieldError error : errors) {
             System.out.println(error.getField() + " - " + error.getDefaultMessage());
