@@ -18,16 +18,20 @@ public class ProductService {
 
     // 1. Lưu sản phẩm khi nhập form
     public Product handleSaveProduct(Product product) {
-        Product kien = this.productRepository.save(product);
-        return kien;
+        return this.productRepository.save(product);
     }
 
     // 2. Lấy tất cả sản phẩm
-    public List<Product> getAllProduct(Product product) {
+    public List<Product> getAllProduct() {
         return this.productRepository.findAll();
     }
 
-    public Product getInfoProduct(long id) {
+    // 3. Lấy theo id sản phẩm
+    public Optional<Product> fetchProductById(long id) {
         return this.productRepository.findById(id);
+    }
+
+    public void deleteId(long id) {
+        this.productRepository.deleteById(id);
     }
 }

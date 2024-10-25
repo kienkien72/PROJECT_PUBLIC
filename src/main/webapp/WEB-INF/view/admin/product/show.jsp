@@ -7,7 +7,7 @@
         <head>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Product Detail </title>
+            <title>Product Detail ${id} </title>
             <link href="/css/styles.css" rel="stylesheet" />
             <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
         </head>
@@ -29,7 +29,7 @@
                 <div id="layoutSidenav_content">
                     <main>
                         <div class="container-fluid px-4">
-                            <h1 class="mt-4">Product Detail</h1>
+
                             <div>
                                 <div class="container mt-5">
                                     <div class="col-12 mx-auto">
@@ -39,17 +39,17 @@
                                         <hr>
                                         <div class="card" style="width: 60%">
                                             <div class="card-header">
-                                                <h3>Product detail</h3>
+                                                <h3>Product detail ${id}</h3>
                                             </div>
                                             <ul class="list-group list-group-flush">
                                                 <li class="list-group-item">Id: ${infoPr.id} </li>
-                                                <li class="list-group-item">Name ${infoPr.name} </li>
-                                                <li class="list-group-item">Price ${infoPr.price} </li>
-                                                <li class="list-group-item">Detail description ${infoPr.detailDesc}
+                                                <li class="list-group-item">Name: ${infoPr.name} </li>
+                                                <li class="list-group-item">Price: ${infoPr.price} </li>
+                                                <li class="list-group-item">Detail description: ${infoPr.detailDesc}
                                                 </li>
-                                                <li class="list-group-item">Short description ${infoPr.shortDesc} </li>
-                                                <li class="list-group-item">Factory ${infoPr.factory} </li>
-                                                <li class="list-group-item">Target ${infoPr.target} </li>
+                                                <li class="list-group-item">Short description: ${infoPr.shortDesc} </li>
+                                                <li class="list-group-item">Factory: ${infoPr.factory} </li>
+                                                <li class="list-group-item">Target: ${infoPr.target} </li>
                                                 <li class="list-group-item">Avatar: ${infoPr.avatar} </li>
                                             </ul>
                                         </div>

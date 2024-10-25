@@ -63,7 +63,7 @@ public class ProductController {
     // Lấy tất cả sản phẩm
     @GetMapping("/admin/product")
     public String getProductPage(Model model) {
-        List<Product> products = this.productService.getAllProduct(null);
+        List<Product> products = this.productService.getAllProduct();
         model.addAttribute("product1", products);
         return "admin/product/table-product";
     }
@@ -71,10 +71,62 @@ public class ProductController {
     // Xem Thông tin chi tiết một sản phẩm
     @GetMapping("/admin/product/{id}")
     public String getProductId(Model model, @PathVariable long id) {
-        Product product = this.productService.getInfoProduct(id);
-        model.addAttribute("infoPr", product);
+        Optional<Product> product = this.productService.fetchProductById(id);
+        model.addAttribute("infoPr", product.get());
         model.addAttribute("id", id);
         return "admin/product/show";
     }
 
+    @GetMapping("/admin/product/update/{id}")
+    public String getUpdateProductPage(Model model, @PathVariable long id) {
+        Optional<Product> currentProduct = this.productService.fetchProductById(id);
+        model.addAttribute("newProduct", currentProduct.get());
+        return "admin/product/update";
+    }
+
+    @PostMapping("/admin/product/update")
+    public String handleUpdateProduct(@ModelAttribute("newProduct") @Valid Product pr,
+            BindingResult newProductBindingResult,
+            @RequestParam("fileImage") MultipartFile file) {
+
+        // validate
+        if (newProductBindingResult.hasErrors()) {
+            return "admin/product/update";
+        }
+
+        Product currentProduct = this.productService.fetchProductById(pr.getId()).get();
+        if (currentProduct != null) {
+            // update new image
+            if (!file.isEmpty()) {
+                String img = this.uploadService.handleSaveUploadFile(file, "product");
+                currentProduct.setImage(img);
+            }
+
+            currentProduct.setName(pr.getName());
+            currentProduct.setPrice(pr.getPrice());
+            currentProduct.setQuantity(pr.getQuantity());
+            currentProduct.setDetailDesc(pr.getDetailDesc());
+            currentProduct.setShortDesc(pr.getShortDesc());
+            currentProduct.setFactory(pr.getFactory());
+            currentProduct.setTarget(pr.getTarget());
+
+            this.productService.handleSaveProduct(currentProduct);
+        }
+
+        return "redirect:/admin/product";
+    }
+
+    @GetMapping("/admin/product/delete/{id}")
+    public String deleteProductId(Model model, @PathVariable long id) {
+        model.addAttribute("product", new Product());
+        model.addAttribute("id", id);
+
+        return "admin/product/delete";
+    }
+
+    @PostMapping("/admin/product/delete")
+    public String deleteProduct(Model model, @ModelAttribute("newProduct") Product product) {
+        this.productService.deleteId(product.getId());
+        return "redirect:/admin/product";
+    }
 }
