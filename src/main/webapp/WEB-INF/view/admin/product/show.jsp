@@ -2,6 +2,7 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
+
         <html lang="en">
 
         <head>
@@ -47,7 +48,8 @@
                                                 <li class="list-group-item">Price: ${infoPr.price} </li>
                                                 <li class="list-group-item">Detail description: ${infoPr.detailDesc}
                                                 </li>
-                                                <li class="list-group-item">Short description: ${infoPr.shortDesc} </li>
+                                                <li class="list-group-item">Short description: ${infoPr.shortDesc}
+                                                </li>
                                                 <li class="list-group-item">Factory: ${infoPr.factory} </li>
                                                 <li class="list-group-item">Target: ${infoPr.target} </li>
                                                 <li class="list-group-item">Avatar: ${infoPr.avatar} </li>
