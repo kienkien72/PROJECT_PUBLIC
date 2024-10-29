@@ -115,7 +115,9 @@
                                                                 style="top: 10px; left: 10px;">${product.name}</div>
                                                             <div
                                                                 class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                                <h4 style="font-size: 15px;"> ${product.name}</h4>
+                                                                <a href="product/${product.id}">
+                                                                    <h4 style="font-size: 15px;"> ${product.name}</h4>
+                                                                </a>
                                                                 <p style="font-size: 13px;">${product.shortDesc} </p>
                                                                 <div class="d-flex  flex-lg-wrap">
                                                                     <p style="font-size: 15px; text-align: center; width: 100%;"
