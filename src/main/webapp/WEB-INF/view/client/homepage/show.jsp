@@ -75,18 +75,13 @@
                 <!-- Banner -->
                 <jsp:include page="../layout/banner.jsp" />
 
-
-                <!-- Feature -->
-                <jsp:include page="../layout/feature.jsp" />
-
-
                 <!-- Fruits Shop Start-->
                 <div class="container-fluid fruite py-5">
                     <div class="container py-5">
                         <div class="tab-class text-center">
                             <div class="row g-4">
                                 <div class="col-lg-4 text-start">
-                                    <h1>Sản phẩm hot</h1>
+                                    <h1>Sản phẩm nổi bật</h1>
                                 </div>
                                 <div class="col-lg-8 text-end">
                                     <ul class="nav nav-pills d-inline-flex text-center mb-5">
@@ -112,7 +107,7 @@
                                                                     class="img-fluid w-100 rounded-top" alt="">
                                                             </div>
                                                             <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                                                style="top: 10px; left: 10px;">${product.name}</div>
+                                                                style="top: 10px; left: 10px;">Laptop</div>
                                                             <div
                                                                 class="p-4 border border-secondary border-top-0 rounded-bottom">
                                                                 <a href="product/${product.id}">
@@ -203,6 +198,8 @@
                 </div>
                 <!-- Fruits Shop End-->
 
+                <!-- Feature -->
+                <jsp:include page="../layout/feature.jsp" />
 
                 <!-- Footer -->
                 <jsp:include page="../layout/footer.jsp" />

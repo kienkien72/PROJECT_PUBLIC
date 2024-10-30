@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import vn.ndkien.laptopshop.domain.Role;
 import vn.ndkien.laptopshop.domain.User;
+import vn.ndkien.laptopshop.domain.auth.Register;
 import vn.ndkien.laptopshop.repository.RoleRepository;
 import vn.ndkien.laptopshop.repository.UserRepository;
 
@@ -44,5 +45,15 @@ public class UserService {
     // 5. Lấy Role
     public Role getRoleByName(String name) {
         return this.roleRepository.findByName(name);
+    }
+
+    public User registerDTOtoUser(Register register) {
+        User user = new User();
+
+        user.setFullname(register.getFirstName() + " " + register.getLastName());
+        user.setEmail(register.getEmail());
+        user.setPassword(register.getPassword());
+
+        return user;
     }
 }
