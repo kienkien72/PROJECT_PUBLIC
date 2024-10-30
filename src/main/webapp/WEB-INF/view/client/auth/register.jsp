@@ -15,17 +15,40 @@
                 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 
                 <style>
-                    .custom-gradient {
-                        background-image: linear-gradient(to right, #8e2de2, #4a00e0);
-
+                    .custom-background {
+                        background-image: url('/client/img/modern.jpg');
+                        background-size: cover;
+                        background-position: center;
+                        position: relative;
                         padding: 50px;
+                    }
+
+                    /* Lớp phủ đen mờ */
+                    .custom-background::before {
+                        content: '';
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        right: 0;
+                        bottom: 0;
+                        background-color: rgba(0, 0, 0, 0.5);
+                        /* Độ mờ của lớp phủ đen */
+                        z-index: 1;
+                    }
+
+                    .custom-background-content {
+                        position: relative;
+                        z-index: 2;
+                        /* Để nội dung nằm trên lớp phủ đen */
+                        color: black;
+                        /* Màu chữ nếu cần */
                     }
                 </style>
             </head>
 
-            <body class="custom-gradient">
-                <div id="layoutAuthentication">
-                    <div id="layoutAuthentication_content">
+            <body class="">
+                <div class="custom-background" id="layoutAuthentication">
+                    <div class="custom-background-content" id="layoutAuthentication_content">
                         <main>
                             <div class="container">
                                 <div class="row justify-content-center">
@@ -37,6 +60,13 @@
                                             <div class="card-body">
                                                 <form:form method="post" action="/register"
                                                     modelAttribute="registerUser">
+                                                    <c:set var="errorPassword">
+                                                        <form:errors path="confirmPassword"
+                                                            cssClass="invalid-feedback" />
+                                                    </c:set>
+                                                    <c:set var="errorEmail">
+                                                        <form:errors path="email" cssClass="invalid-feedback" />
+                                                    </c:set>
                                                     <div class="row mb-3">
                                                         <div class="col-md-6">
                                                             <div class="form-floating mb-3 mb-md-0">
@@ -56,24 +86,31 @@
                                                         </div>
                                                     </div>
                                                     <div class="form-floating mb-3">
-                                                        <form:input class="form-control" type="email"
-                                                            placeholder="name@example.com" path="email" />
+                                                        <form:input
+                                                            class="form-control ${not empty errorEmail ? 'is-invalid':''}"
+                                                            type="email" placeholder="name@example.com" path="email" />
                                                         <label>Email address</label>
+                                                        ${errorEmail}
                                                     </div>
                                                     <div class="row mb-3">
                                                         <div class="col-md-6">
                                                             <div class="form-floating mb-3 mb-md-0">
-                                                                <form:input class="form-control" type="password"
-                                                                    placeholder="Create a password" path="password" />
+                                                                <form:input
+                                                                    class="form-control ${not empty errorPassword ? 'is-invalid':''}"
+                                                                    type="password" placeholder="Create a password"
+                                                                    path="password" />
                                                                 <label>Password</label>
+                                                                ${errorPassword}
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="form-floating mb-3 mb-md-0">
-                                                                <form:input class="form-control" type="password"
+                                                                <form:input class="form-control " type="password"
                                                                     placeholder="Confirm password"
                                                                     path="confirmPassword" />
                                                                 <label>Confirm Password</label>
+
+                                                                <!-- <form:errors path="confirmPassword" /> -->
                                                             </div>
                                                         </div>
                                                     </div>

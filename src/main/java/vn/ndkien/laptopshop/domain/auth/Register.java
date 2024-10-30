@@ -1,5 +1,8 @@
 package vn.ndkien.laptopshop.domain.auth;
 
+import vn.ndkien.laptopshop.service.validator.RegisterChecked;
+
+@RegisterChecked
 public class Register {
     private String firstName;
     private String lastName;
