@@ -47,6 +47,7 @@ public class UserService {
         return this.roleRepository.findByName(name);
     }
 
+    // Lưu người dùng vào database
     public User registerDTOtoUser(Register register) {
         User user = new User();
 

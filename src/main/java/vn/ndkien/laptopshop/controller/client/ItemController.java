@@ -18,6 +18,7 @@ public class ItemController {
         this.productService = productService;
     }
 
+    // Xem chi tiết một sản phẩm
     @GetMapping("/product/{id}")
 
     public String getProductPage(Model model, @PathVariable long id) {
