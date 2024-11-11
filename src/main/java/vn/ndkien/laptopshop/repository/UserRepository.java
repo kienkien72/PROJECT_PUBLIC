@@ -13,10 +13,12 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     // Định nghĩa về các câu query
     // Trả về list danh sách người dùng
-    List<User> findByEmail(String email);
+    // List<User> findByEmail(String email);
 
     // Trả về một người dùng theo id
     User findById(long id);
 
     boolean existsByEmail(String email);
+
+    User findByEmail(String email);
 }

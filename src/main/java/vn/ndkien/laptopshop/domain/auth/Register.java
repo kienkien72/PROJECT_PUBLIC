@@ -1,14 +1,25 @@
 package vn.ndkien.laptopshop.domain.auth;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import vn.ndkien.laptopshop.service.validator.RegisterChecked;
+import vn.ndkien.laptopshop.service.validator.StrongPassword;
 
 @RegisterChecked
 public class Register {
+
+    @Size(min = 8, message = "Tên tối thiểu có 4 ký tự")
     private String firstName;
+
     private String lastName;
+
+    @Email(message = "Email không hợp lệ", regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")
     private String email;
     private long phoneNumber;
     private String password;
+
+    @StrongPassword(message = "Mật khẩu tối thiểu có 3 ký tự")
     private String confirmPassword;
 
     public String getFirstName() {

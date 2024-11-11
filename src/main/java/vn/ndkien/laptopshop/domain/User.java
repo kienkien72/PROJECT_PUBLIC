@@ -29,7 +29,7 @@ public class User {
     private String email;
 
     @NotNull
-    @StrongPassword(message = "Mật khẩu tối thiểu có 8 ký tự")
+    // @StrongPassword(message = "Mật khẩu tối thiểu có 6 ký tự")
     private String password;
 
     @NotNull
