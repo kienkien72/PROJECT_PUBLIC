@@ -169,18 +169,22 @@
                                                 <h3 class="text-center font-weight-light my-4">Đăng nhập</h3>
                                             </div>
                                             <div class="card-body">
-                                                <form>
+                                                <form method="post" action="/login">
                                                     <div class="form-floating mb-3">
                                                         <input class="form-control" id="inputEmail" type="email"
-                                                            placeholder="name@example.com" />
+                                                            placeholder="name@example.com" name="username" />
                                                         <label for="inputEmail">Địa chỉ email</label>
                                                     </div>
                                                     <div class="form-floating mb-3">
                                                         <input class="form-control" id="inputPassword" type="password"
-                                                            placeholder="Password" />
+                                                            placeholder="Password" name="password" />
                                                         <label for="inputPassword">Mật khẩu</label>
                                                     </div>
+                                                    <div>
+                                                        <input type="hidden" name="${_csrf.parameterName}"
+                                                            value="${_csrf.token}" />
 
+                                                    </div>
                                                     <div
                                                         class="d-flex align-items-center justify-content-between mt-4 mb-0">
                                                         <a class="small" href="password.html">Quên mật khẩu</a>
