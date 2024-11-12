@@ -21,14 +21,23 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                    <ul class="dropdown-menu dropdown-menu-end p-4" aria-labelledby="dropdownMenuLink">
+                        <li class="d-flex align-items-center flex-column" style="min-width: 300px;">
+                            <img style="width: 150px; height: 150px; border-radius: 50%; overflow: hidden;"
+                                src="/images/product/1711078092373-asus-01.png" />
+                            <div class="text-center my-3">
+                                <c:out value="${pageContext.request.userPrincipal.name}" />
+                            </div>
+                        </li>
+
                         <li><a class="dropdown-item" href="#!">Settings</a></li>
 
                         <li>
-                            <hr class="dropdown-divider" />
+                            <hr class="dropdown-divider">
                         </li>
-                        <li><a class="dropdown-item" href="#!">Logout</a></li>
+                        <li><a class="dropdown-item" href="/login">Đăng xuất</a></li>
                     </ul>
+
                 </li>
             </ul>
         </nav>

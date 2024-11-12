@@ -67,7 +67,9 @@ public class SecurityConfig {
                                                 .loginPage("/login")
                                                 .successHandler(customHandlerRole())
                                                 .failureUrl("/login?error")
-                                                .permitAll());
+                                                .permitAll())
+                                // Định nghĩa 403 khi bị lỗi
+                                .exceptionHandling(ex -> ex.accessDeniedPage("/access-deny"));
 
                 return http.build();
         }
