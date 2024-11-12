@@ -140,7 +140,7 @@ public class UserController {
     }
 
     // Xoá user
-    @GetMapping("admin/user/delete/{id}")
+    @GetMapping("/admin/user/delete/{id}")
     public String getDeleteUserPage(Model model, @PathVariable long id) {
         model.addAttribute("newUser", new User());
         model.addAttribute("id", id);
