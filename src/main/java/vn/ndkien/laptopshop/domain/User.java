@@ -9,6 +9,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
@@ -52,6 +53,9 @@ public class User {
     // User one -> to many - order
     @OneToMany(mappedBy = "user")
     private List<Order> order;
+
+    @OneToOne(mappedBy = "user")
+    private Cart cart;
 
     @Override
     public String toString() {
@@ -129,6 +133,14 @@ public class User {
 
     public String getPhone() {
         return phone;
+    }
+
+    public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
     }
 
 }

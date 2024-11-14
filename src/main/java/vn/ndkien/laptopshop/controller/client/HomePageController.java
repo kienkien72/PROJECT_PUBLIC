@@ -86,4 +86,10 @@ public class HomePageController {
 
         return "client/auth/deny";
     }
+
+    @GetMapping("/cart-detail")
+    public String getDetailCartPage() {
+
+        return "client/cart/show";
+    }
 }
