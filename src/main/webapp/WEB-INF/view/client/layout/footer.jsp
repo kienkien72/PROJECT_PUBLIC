@@ -60,7 +60,7 @@
                             <p>Địa chỉ: Đồng Đen, P.14 , Q.Tân Bình</p>
                             <p>Email: ndkien72@gmail.com</p>
                             <p>Phone: (+84) 0325929384</p>
-                            <img src="/client/img/payment.png" class="img-fluid" alt="">
+
                         </div>
                     </div>
                 </div>

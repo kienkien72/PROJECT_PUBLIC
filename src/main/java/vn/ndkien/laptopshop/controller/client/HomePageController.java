@@ -10,9 +10,11 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
+import vn.ndkien.laptopshop.domain.CartDetail;
 import vn.ndkien.laptopshop.domain.Product;
 import vn.ndkien.laptopshop.domain.User;
 import vn.ndkien.laptopshop.domain.auth.Register;
+
 import vn.ndkien.laptopshop.service.ProductService;
 import vn.ndkien.laptopshop.service.UserService;
 
@@ -27,10 +29,13 @@ public class HomePageController {
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
 
-    public HomePageController(ProductService productService, UserService userService, PasswordEncoder passwordEncoder) {
+    public HomePageController(ProductService productService,
+            UserService userService,
+            PasswordEncoder passwordEncoder) {
         this.productService = productService;
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
+
     }
 
     @GetMapping("/")
@@ -87,9 +92,4 @@ public class HomePageController {
         return "client/auth/deny";
     }
 
-    @GetMapping("/cart-detail")
-    public String getDetailCartPage() {
-
-        return "client/cart/show";
-    }
 }

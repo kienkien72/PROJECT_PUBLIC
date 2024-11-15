@@ -50,6 +50,7 @@ public class ProductService {
         this.productRepository.deleteById(id);
     }
 
+    // Xử lí thêm sản phẩm vào giỏ hàng
     public void handleProductToCart(String email, long productId, HttpSession session) {
         // Lấy thông tin người dùng bằng email
         User user = this.userService.getUserByEmail(email);
@@ -66,7 +67,14 @@ public class ProductService {
 
                 // Lưu cart sau khi tạo
                 cart = this.cartRepository.save(otherCart);
+
+                // Gán giỏ hàng vào user và lưu lại user
+                user.setCart(cart);
+                // this.userService.save(user);
+
             }
+            // int sum = user.getCart().getSum();
+            // session.setAttribute("sum", sum);
 
             // Lưu cart_detail
             // Tìm product theo id
@@ -103,6 +111,11 @@ public class ProductService {
 
         }
 
+    }
+
+    // Tìm giỏ hàng theo người dùng
+    public Cart fetchByUser(User user) {
+        return this.cartRepository.findByUser(user);
     }
 
 }
