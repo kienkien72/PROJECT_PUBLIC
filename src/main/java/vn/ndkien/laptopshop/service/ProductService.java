@@ -1,5 +1,6 @@
 package vn.ndkien.laptopshop.service;
 
+import java.lang.StackWalker.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -93,8 +94,8 @@ public class ProductService {
                     // update_card
                     int s = cart.getSum() + 1;
                     cart.setSum(s);
-                    this.cartRepository.save(cart);
-                    session.setAttribute("sum", s);
+                    session.setAttribute("sum", s); // Cập nhật số lượng giỏ hàng
+                    this.cartRepository.save(cart); // Lưu vào giỏ hàng
 
                 } else {
                     oldDetail.setQuantity(oldDetail.getQuantity() + 1);
@@ -110,6 +111,32 @@ public class ProductService {
     // Tìm giỏ hàng theo người dùng
     public Cart fetchByUser(User user) {
         return this.cartRepository.findByUser(user);
+    }
+
+    // Xoá sản phẩm trong giỏ hàng
+    public void handleRemoveCartDetail(long cartDetailId, HttpSession session) {
+        Optional<CartDetail> cartDetailOption = this.cartDetailRepository.findById(cartDetailId);
+        if (cartDetailOption.isPresent()) {
+            CartDetail cartDetail = cartDetailOption.get();
+            Cart cart = cartDetail.getCart();
+
+            // Xoá cartDetail
+            this.cartDetailRepository.deleteById(cartDetailId);
+
+            // update cart
+            if (cart.getSum() > 1) {
+                int s = cart.getSum() - 1;
+                cart.setSum(s);
+                session.setAttribute("sum", s); // Cập nhật session mới
+                this.cartRepository.save(cart); // Lưu giỏ hảng
+            } else {
+                // Xoá card
+                this.cartRepository.deleteById(cart.getId());
+                session.setAttribute("sum", 0);
+
+            }
+        }
+
     }
 
 }

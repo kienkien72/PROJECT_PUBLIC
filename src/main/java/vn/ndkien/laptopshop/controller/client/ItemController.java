@@ -72,4 +72,14 @@ public class ItemController {
         return "client/cart/show";
     }
 
+    @PostMapping("/data-cart-delete/{id}")
+    public String deleteCartId(@PathVariable long id, HttpServletRequest request) {
+        HttpSession session = request.getSession(false); // lấy session hiện tại của người dùng nếu tồn tại
+        long cartDetailId = id;
+        this.productService.handleRemoveCartDetail(cartDetailId, session);
+
+        return "redirect:/cart";
+
+    }
+
 }
