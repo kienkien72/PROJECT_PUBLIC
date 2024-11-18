@@ -68,13 +68,7 @@ public class ProductService {
                 // Lưu cart sau khi tạo
                 cart = this.cartRepository.save(otherCart);
 
-                // Gán giỏ hàng vào user và lưu lại user
-                user.setCart(cart);
-                // this.userService.save(user);
-
             }
-            // int sum = user.getCart().getSum();
-            // session.setAttribute("sum", sum);
 
             // Lưu cart_detail
             // Tìm product theo id

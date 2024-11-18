@@ -1,7 +1,7 @@
 package vn.ndkien.laptopshop.controller.client;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,11 +14,9 @@ import vn.ndkien.laptopshop.domain.Product;
 import vn.ndkien.laptopshop.domain.User;
 import vn.ndkien.laptopshop.service.ProductService;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class ItemController {
@@ -62,8 +60,8 @@ public class ItemController {
 
         Cart cart = this.productService.fetchByUser(currentUser);
 
-        List<CartDetail> cartDetail = cart.getCartDetail(); // Lấy chi tiết sản phẩm
-
+        List<CartDetail> cartDetail = cart == null ? new ArrayList<CartDetail>() : cart.getCartDetail(); // Lấy chi tiết
+                                                                                                         // sản phẩm
         double totalPrice = 0;
         for (CartDetail cd : cartDetail) {
             totalPrice += cd.getPrice() * cd.getQuantity();
