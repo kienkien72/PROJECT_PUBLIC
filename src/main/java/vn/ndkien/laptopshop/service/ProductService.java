@@ -162,13 +162,6 @@ public class ProductService {
 
     public void handlePlaceOrderPage(User user, HttpSession session,
             String receiverName, String receiverAddress, String receiverPhone) {
-        // Tạo mới Order, gắn các giá trị vào
-        Order currentOrder = new Order(0, 0);
-        currentOrder.setUser(user);// Lấy user_id theo user
-        currentOrder.setReceiverAddress(receiverAddress);
-        currentOrder.setReceiverName(receiverName);
-        currentOrder.setReceiverPhone(receiverPhone);
-        currentOrder = this.orderRepository.save(currentOrder);
 
         // Lấy thông tin cart theo người dùng
         Cart cart = this.cartRepository.findByUser(user);
@@ -177,6 +170,21 @@ public class ProductService {
             List<CartDetail> cartDetails = cart.getCartDetail();
 
             if (cartDetails != null) {
+                // Tạo mới Order, gắn các giá trị vào
+                Order currentOrder = new Order(0, 0);
+                currentOrder.setUser(user);// Lấy user_id theo user
+                currentOrder.setReceiverAddress(receiverAddress);
+                currentOrder.setReceiverName(receiverName);
+                currentOrder.setReceiverPhone(receiverPhone);
+                currentOrder.setStatus("PENDING");
+                double sum = 0;
+                for (CartDetail cd : cartDetails) {
+                    sum += cd.getPrice();
+                }
+                currentOrder.setTotalPrice(sum);
+
+                currentOrder = this.orderRepository.save(currentOrder);
+
                 // Lặp để lấy các thông số gán vào OrderDetail
                 for (CartDetail cd : cartDetails) {
                     // Tạo mới orderDetail

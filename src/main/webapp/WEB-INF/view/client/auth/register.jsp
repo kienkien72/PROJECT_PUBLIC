@@ -239,7 +239,8 @@
                                                 </form:form>
                                             </div>
                                             <div class="card-footer text-center py-3">
-                                                <div class="small"><a href="/login">Đã có tài khoản ! Đăng nhập</a>
+                                                <div class="small">
+                                                    <a href="/login">Đã có tài khoản ! Đăng nhập</a>
                                                 </div>
                                             </div>
                                         </div>

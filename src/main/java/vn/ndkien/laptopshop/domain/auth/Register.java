@@ -9,7 +9,6 @@ import vn.ndkien.laptopshop.service.validator.StrongPassword;
 @RegisterChecked
 public class Register {
 
-    @Size(min = 8, message = "Tên tối thiểu có 4 ký tự")
     private String firstName;
 
     private String lastName;
@@ -19,7 +18,7 @@ public class Register {
     private long phoneNumber;
     private String password;
 
-    @StrongPassword(message = "Mật khẩu tối thiểu có 3 ký tự")
+    @StrongPassword(message = "Mật khẩu tối thiểu có 1 ký tự")
     private String confirmPassword;
 
     public String getFirstName() {
