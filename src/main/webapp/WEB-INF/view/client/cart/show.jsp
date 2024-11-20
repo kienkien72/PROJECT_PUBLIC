@@ -183,6 +183,7 @@
                                                 <input type="hidden" name="${_csrf.parameterName}"
                                                     value="${_csrf.token}" />
                                                 <div style="display: none;">
+                                                    <!-- varStatus="status" lấy ở mỗi vòng lặp for -->
                                                     <c:forEach var="cartDetail" items="${cart.cartDetail}"
                                                         varStatus="status">
                                                         <div class="mb-3">

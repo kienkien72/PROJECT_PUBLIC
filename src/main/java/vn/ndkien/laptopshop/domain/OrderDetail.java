@@ -1,6 +1,5 @@
 package vn.ndkien.laptopshop.domain;
 
-import jakarta.annotation.Generated;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -34,6 +33,10 @@ public class OrderDetail {
         this.price = price;
         this.order = order;
         this.product = product;
+    }
+
+    public OrderDetail() {
+        // TODO Auto-generated constructor stub
     }
 
     public long getId() {

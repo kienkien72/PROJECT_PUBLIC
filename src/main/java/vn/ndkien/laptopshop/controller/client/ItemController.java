@@ -115,8 +115,22 @@ public class ItemController {
             @RequestParam("receiverName") String receiverName,
             @RequestParam("receiverAddress") String receiverAddress,
             @RequestParam("receiverPhone") String receiverPhone) {
+        // Lấy user đang ở phiên đăng nhập
+        User currenUser = new User();
         HttpSession session = request.getSession(false);
-        return "redirect:/";
+        long id = (long) session.getAttribute("id");
+        currenUser.setId(id);
+
+        this.productService.handlePlaceOrderPage(currenUser, session, receiverName,
+                receiverAddress,
+                receiverPhone);
+
+        return "redirect:/thank";
+    }
+
+    @GetMapping("/thank")
+    public String thankPage() {
+        return "client/cart/thank";
     }
 
 }

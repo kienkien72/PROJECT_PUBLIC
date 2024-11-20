@@ -9,10 +9,14 @@ import org.springframework.stereotype.Service;
 import jakarta.servlet.http.HttpSession;
 import vn.ndkien.laptopshop.domain.Cart;
 import vn.ndkien.laptopshop.domain.CartDetail;
+import vn.ndkien.laptopshop.domain.Order;
+import vn.ndkien.laptopshop.domain.OrderDetail;
 import vn.ndkien.laptopshop.domain.Product;
 import vn.ndkien.laptopshop.domain.User;
 import vn.ndkien.laptopshop.repository.CartDetailRepository;
 import vn.ndkien.laptopshop.repository.CartRepository;
+import vn.ndkien.laptopshop.repository.OrderDetailRepository;
+import vn.ndkien.laptopshop.repository.OrderRepository;
 import vn.ndkien.laptopshop.repository.ProductRepository;
 
 @Service
@@ -21,14 +25,20 @@ public class ProductService {
     private CartDetailRepository cartDetailRepository;
     private CartRepository cartRepository;
     private UserService userService;
+    private OrderRepository orderRepository;
+    private OrderDetailRepository orderDetailRepository;
 
     public ProductService(ProductRepository productRepository,
             CartDetailRepository cartDetailRepository,
-            CartRepository cartRepository, UserService userService) {
+            CartRepository cartRepository, UserService userService,
+            OrderRepository orderRepository,
+            OrderDetailRepository orderDetailRepository) {
         this.productRepository = productRepository;
         this.cartDetailRepository = cartDetailRepository;
         this.cartRepository = cartRepository;
         this.userService = userService;
+        this.orderRepository = orderRepository;
+        this.orderDetailRepository = orderDetailRepository;
     }
 
     // 1. Lưu sản phẩm khi nhập form
@@ -148,5 +158,48 @@ public class ProductService {
                 this.cartDetailRepository.save(currentCartDetail);
             }
         }
+    }
+
+    public void handlePlaceOrderPage(User user, HttpSession session,
+            String receiverName, String receiverAddress, String receiverPhone) {
+        // Tạo mới Order, gắn các giá trị vào
+        Order currentOrder = new Order(0, 0);
+        currentOrder.setUser(user);// Lấy user_id theo user
+        currentOrder.setReceiverAddress(receiverAddress);
+        currentOrder.setReceiverName(receiverName);
+        currentOrder.setReceiverPhone(receiverPhone);
+        currentOrder = this.orderRepository.save(currentOrder);
+
+        // Lấy thông tin cart theo người dùng
+        Cart cart = this.cartRepository.findByUser(user);
+        if (cart != null) {
+            // Lấy thông tin cartDetail từ cart
+            List<CartDetail> cartDetails = cart.getCartDetail();
+
+            if (cartDetails != null) {
+                // Lặp để lấy các thông số gán vào OrderDetail
+                for (CartDetail cd : cartDetails) {
+                    // Tạo mới orderDetail
+                    OrderDetail currenOrderDetail = new OrderDetail(0, 0, 0, currentOrder, null);
+                    currenOrderDetail.setOrder(currentOrder); // Lấy order_id
+                    currenOrderDetail.setProduct(cd.getProduct()); // Lấy product_id
+                    currenOrderDetail.setId(cd.getId());
+                    currenOrderDetail.setPrice(cd.getPrice());
+                    currenOrderDetail.setQuantity(cd.getQuantity());
+                    this.orderDetailRepository.save(currenOrderDetail);
+                }
+
+                // Xoá CartDetail
+                for (CartDetail cd : cartDetails) {
+                    this.cartDetailRepository.deleteById(cd.getId());
+                }
+                // Xoá Cart
+                this.cartRepository.deleteById(cart.getId());
+
+                // Cập nhật session mới
+                session.setAttribute("sum", 0);
+            }
+        }
+
     }
 }

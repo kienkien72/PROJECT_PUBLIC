@@ -22,6 +22,19 @@ public class Order {
     private String receiverAddress;
     private String receiverPhone;
     private String status;
+    // user id
+    // Order many -> to one-user
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    // orderDetail
+    @OneToMany(mappedBy = "order")
+    private List<OrderDetail> orderDetail;
+
+    public Order() {
+        // TODO Auto-generated constructor stub
+    }
 
     public String getReceiverName() {
         return receiverName;
@@ -70,16 +83,6 @@ public class Order {
     public void setOrderDetail(List<OrderDetail> orderDetail) {
         this.orderDetail = orderDetail;
     }
-
-    // user id
-    // Order many -> to one-user
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
-
-    // orderDetail
-    @OneToMany(mappedBy = "order")
-    private List<OrderDetail> orderDetail;
 
     public Order(long id, double totalPrice) {
         this.id = id;
