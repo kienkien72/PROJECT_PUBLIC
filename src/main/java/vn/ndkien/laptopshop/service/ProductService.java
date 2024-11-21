@@ -176,7 +176,7 @@ public class ProductService {
                 currentOrder.setReceiverAddress(receiverAddress);
                 currentOrder.setReceiverName(receiverName);
                 currentOrder.setReceiverPhone(receiverPhone);
-                currentOrder.setStatus("PENDING");
+                currentOrder.setStatus("status");
                 double sum = 0;
                 for (CartDetail cd : cartDetails) {
                     sum += cd.getPrice();

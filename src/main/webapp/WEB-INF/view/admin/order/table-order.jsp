@@ -29,7 +29,7 @@
                     <div id="layoutSidenav_content">
                         <main>
                             <div class="container-fluid px-4">
-                                <h1 class="mt-4">Manage Product</h1>
+                                <h1 class="mt-4">Manage Order</h1>
                                 <ol class="breadcrumb mb-4">
                                     <a href="/admin" class="breadcrumb-item active">Dashboard </a>
                                     <div>/ Order</div>
@@ -61,16 +61,16 @@
                                                                     value="${order.totalPrice}" /> đ
                                                             </td>
 
-                                                            <td>${order.user.id} </td>
+                                                            <td>${order.user.role.name} </td>
                                                             <td>${order.status}</td>
 
 
                                                             <td>
-                                                                <a href="/admin/product/${product.id}"
+                                                                <a href="/admin/order/${order.id}"
                                                                     class="btn btn-success">View</a>
-                                                                <a href="/admin/product/update/${product.id}"
+                                                                <a href="/admin/order/update/${order.id}"
                                                                     class="btn btn-warning mx-2">Update</a>
-                                                                <a href="/admin/product/delete/${product.id}"
+                                                                <a href="/admin/order/delete/${order.id}"
                                                                     class="btn btn-danger">Delete</a>
                                                             </td>
                                                         </tr>
