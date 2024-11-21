@@ -1,7 +1,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
         <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
+
             <html lang="en">
 
             <head>
@@ -31,41 +32,37 @@
                                 <h1 class="mt-4">Manage Product</h1>
                                 <ol class="breadcrumb mb-4">
                                     <a href="/admin" class="breadcrumb-item active">Dashboard </a>
-                                    <div>/ Product</div>
+                                    <div>/ Order</div>
                                 </ol>
                                 <div>
                                     <div class="container mt-5">
                                         <div class="col-12 mx-auto">
-                                            <div class="d-flex justify-content-between align-items-center">
-                                                <h2>Table Products</h2>
-                                                <a class="btn btn-primary" href="/admin/product/create">Create
-                                                    product</a>
-                                            </div>
+
                                             <hr>
                                             <table class="table table-hover">
                                                 <thead>
                                                     <tr>
                                                         <th scope="col">ID</th>
-                                                        <th scope="col">Name</th>
-                                                        <th scope="col">Price</th>
-                                                        <th scope="col">Factory</th>
+                                                        <th scope="col">Total price</th>
+                                                        <th scope="col">User</th>
+                                                        <th scope="col">Status</th>
                                                         <th scope="col">Action</th>
                                                     </tr>
                                                 </thead>
 
                                                 <tbody>
 
-                                                    <c:forEach var="product" items="${product1}">
+                                                    <c:forEach var="order" items="${order}">
                                                         <!-- // Var= name sẽ tương ứng với biến trong service -->
                                                         <tr>
-                                                            <th>${product.id}</th>
-                                                            <td>${product.name} </td>
+                                                            <th>${order.id}</th>
                                                             <td>
                                                                 <fmt:formatNumber type="number"
-                                                                    value="${product.price}" /> đ
+                                                                    value="${order.totalPrice}" /> đ
                                                             </td>
 
-                                                            <td>${product.factory}</td>
+                                                            <td>${order.user.id} </td>
+                                                            <td>${order.status}</td>
 
 
                                                             <td>
