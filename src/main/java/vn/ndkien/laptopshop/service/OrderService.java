@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import vn.ndkien.laptopshop.domain.Order;
 import vn.ndkien.laptopshop.domain.OrderDetail;
+import vn.ndkien.laptopshop.domain.User;
 import vn.ndkien.laptopshop.repository.OrderDetailRepository;
 import vn.ndkien.laptopshop.repository.OrderRepository;
 
@@ -51,6 +52,10 @@ public class OrderService {
             }
             this.orderRepository.deleteById(id);
         }
+    }
+
+    public List<Order> fetchOrderPage(User user) {
+        return this.orderRepository.findByUser(user);
     }
 
 }

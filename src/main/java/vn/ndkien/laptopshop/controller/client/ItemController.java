@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import vn.ndkien.laptopshop.domain.Cart;
 import vn.ndkien.laptopshop.domain.CartDetail;
+import vn.ndkien.laptopshop.domain.Order;
 import vn.ndkien.laptopshop.domain.Product;
 import vn.ndkien.laptopshop.domain.User;
+import vn.ndkien.laptopshop.service.OrderService;
 import vn.ndkien.laptopshop.service.ProductService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,14 +25,15 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 public class ItemController {
     private final ProductService productService;
+    private final OrderService orderService;
 
-    public ItemController(ProductService productService) {
+    public ItemController(ProductService productService, OrderService orderService) {
         this.productService = productService;
+        this.orderService = orderService;
     }
 
     // Xem chi tiết một sản phẩm
     @GetMapping("/product/{id}")
-
     public String getProductPage(Model model, @PathVariable long id) {
         Product product = this.productService.fetchProductById(id).get();
         model.addAttribute("product", product);
@@ -131,6 +134,20 @@ public class ItemController {
     @GetMapping("/thank")
     public String thankPage() {
         return "client/cart/thank";
+    }
+
+    @GetMapping("/order-history")
+    public String getOrderHistoryPage(Model model, HttpServletRequest request) {
+        User currentUser = new User();
+        HttpSession session = request.getSession(false);
+        long id = (long) session.getAttribute("id");
+        currentUser.setId(id);
+
+        List<Order> orders = this.orderService.fetchOrderPage(currentUser);
+
+        model.addAttribute("order", orders);
+
+        return "client/cart/order-history";
     }
 
 }

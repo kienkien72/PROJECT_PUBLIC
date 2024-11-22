@@ -48,6 +48,7 @@
                                                             <th scope="col">Giá tiền</th>
                                                             <th scope="col">Số lượng</th>
                                                             <th scope="col">Thành tiền</th>
+                                                            <th scope="col">Trạng thái</th>
                                                         </tr>
                                                 </thead>
 
@@ -87,6 +88,13 @@
                                                                 <fmt:formatNumber type="number"
                                                                     value="${orderDetail.price * orderDetail.quantity}" />
                                                                 đ
+                                                            </p>
+                                                        </td>
+                                                        <td>
+                                                            <p class="mb-0 mt-4">
+
+                                                                ${orderDetail.order.status}
+
                                                             </p>
                                                         </td>
                                                     </tr>
