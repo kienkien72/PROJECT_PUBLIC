@@ -62,7 +62,7 @@ public class ProductService {
     }
 
     // Xử lí thêm sản phẩm vào giỏ hàng
-    public void handleProductToCart(String email, long productId, HttpSession session) {
+    public void handleProductToCart(String email, long productId, HttpSession session, long quantity) {
         // Lấy thông tin người dùng bằng email
         User user = this.userService.getUserByEmail(email);
 
@@ -95,7 +95,7 @@ public class ProductService {
                 // Tạo mới cartDetail
                 if (oldDetail == null) {
                     CartDetail cd = new CartDetail();
-                    cd.setQuantity(1);
+                    cd.setQuantity(quantity);
                     cd.setCart(cart);
                     cd.setProduct(realProduct);
                     cd.setPrice(realProduct.getPrice());
@@ -108,7 +108,7 @@ public class ProductService {
                     this.cartRepository.save(cart); // Lưu vào giỏ hàng
 
                 } else {
-                    oldDetail.setQuantity(oldDetail.getQuantity() + 1);
+                    oldDetail.setQuantity(oldDetail.getQuantity() + quantity);
                     this.cartDetailRepository.save(oldDetail);
                 }
 

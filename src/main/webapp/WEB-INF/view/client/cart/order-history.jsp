@@ -73,7 +73,9 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-
+                                        <!-- Hai vòng lặp for:
+                                        Vòng 1: Lấy thông tin Order
+                                        Vòng 2: Lấy chi tiết đơn hàng -->
                                         <c:forEach var="order" items="${order}">
                                             <tr>
                                                 <td colspan="2">Order Id = ${order.id}</td>
@@ -82,13 +84,12 @@
                                                     <fmt:formatNumber type="number" value="${order.totalPrice}" /> đ
                                                 </td>
                                                 <td colspan="1"></td>
-
                                                 <td colspan="1">
                                                     ${order.status}
                                                 </td>
                                             </tr>
 
-                                            <c:forEach var="orderDetail" items="${order.orderDetail}">
+                                            <c:f orEach var="orderDetail" items="${order.orderDetail}">
                                                 <!-- // Var= name sẽ tương ứng với biến trong service -->
                                                 <tr>
                                                     <td><img src="/images/product/${orderDetail.product.image}"
@@ -130,7 +131,7 @@
                                                         </p>
                                                     </td>
                                                 </tr>
-                                            </c:forEach>
+                                            </c:f>
                                         </c:forEach>
 
                                     </tbody>

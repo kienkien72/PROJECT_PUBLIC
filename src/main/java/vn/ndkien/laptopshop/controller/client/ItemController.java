@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class ItemController {
@@ -51,7 +52,7 @@ public class ItemController {
 
         String email = (String) session.getAttribute("email"); // Lấy email của người dùng từ session
 
-        this.productService.handleProductToCart(email, productId, session);
+        this.productService.handleProductToCart(email, productId, session, 1);
         return "redirect:/";
     }
 
@@ -148,6 +149,20 @@ public class ItemController {
         model.addAttribute("order", orders);
 
         return "client/cart/order-history";
+    }
+
+    @PostMapping("/add-product-from-view-detail")
+    public String addProductFromView(HttpServletRequest request, @RequestParam("id") long id,
+            @RequestParam("quantity") long quantity) {
+        // Lấy session đang hoạt động
+        HttpSession session = request.getSession(false);
+
+        // Lấy email đang trong session
+        String email = (String) session.getAttribute("email");
+
+        // Logic thêm sản phẩm vào giỏ hàng
+        this.productService.handleProductToCart(email, id, session, quantity);
+        return "redirect:/product/" + id;
     }
 
 }
