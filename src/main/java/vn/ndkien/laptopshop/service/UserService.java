@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import vn.ndkien.laptopshop.domain.Role;
 import vn.ndkien.laptopshop.domain.User;
 import vn.ndkien.laptopshop.domain.auth.Register;
+import vn.ndkien.laptopshop.repository.OrderRepository;
+import vn.ndkien.laptopshop.repository.ProductRepository;
 import vn.ndkien.laptopshop.repository.RoleRepository;
 import vn.ndkien.laptopshop.repository.UserRepository;
 
@@ -14,11 +16,16 @@ import vn.ndkien.laptopshop.repository.UserRepository;
 public class UserService {
     private UserRepository userRepository;
     private RoleRepository roleRepository;
+    private ProductRepository productRepository;
+    private OrderRepository orderRepository;
 
     // Constructor
-    public UserService(UserRepository userRepository, RoleRepository roleRepository) {
+    public UserService(UserRepository userRepository, RoleRepository roleRepository,
+            ProductRepository productRepository, OrderRepository orderRepository) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
+        this.productRepository = productRepository;
+        this.orderRepository = orderRepository;
     }
 
     // 1. Lưu dữ liệu người dùng khi nhập form
@@ -64,5 +71,17 @@ public class UserService {
 
     public User getUserByEmail(String email) {
         return this.userRepository.findByEmail(email);
+    }
+
+    public long countUser() {
+        return this.userRepository.count();
+    }
+
+    public long countProduct() {
+        return this.productRepository.count();
+    }
+
+    public long countOrder() {
+        return this.orderRepository.count();
     }
 }
