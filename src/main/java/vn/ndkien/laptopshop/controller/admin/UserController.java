@@ -3,6 +3,9 @@ package vn.ndkien.laptopshop.controller.admin;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -52,12 +55,26 @@ public class UserController {
 
     // 2. Lấy danh sách tất cả người dùng
     @RequestMapping("/admin/user")
-    public String getUserPage(Model model) {
-        List<User> users = this.userService.getAllUser(null);
+    public String getUserPage(Model model, @RequestParam("page") Optional<String> pageOptional) {
+        int page = 1;
+        try {
+            if (pageOptional.isPresent()) {
+                page = Integer.parseInt(pageOptional.get());
+            } else {
+                // page = 1;
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+        Pageable pageable = PageRequest.of(page - 1, 4);
+        Page<User> users = this.userService.getAllUser(pageable);
+        List<User> userList = users.getContent();
         // Truyền data qua view trong đó:
         // users :giá trị gắn vào
         // users1: giá trị nhận được bên View
-        model.addAttribute("users1", users);
+        model.addAttribute("users1", userList);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", users.getTotalPages());
         return "admin/user/table-user";
     }
 

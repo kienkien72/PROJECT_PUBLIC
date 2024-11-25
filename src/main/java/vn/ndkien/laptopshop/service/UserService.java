@@ -2,6 +2,8 @@ package vn.ndkien.laptopshop.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import vn.ndkien.laptopshop.domain.Role;
@@ -35,8 +37,8 @@ public class UserService {
     }
 
     // 2. Lấy danh sách tất cả người dùng
-    public List<User> getAllUser(User user) {
-        return this.userRepository.findAll();
+    public Page<User> getAllUser(Pageable pageable) {
+        return this.userRepository.findAll(pageable);
     }
 
     // 3. Lấy danh sách người dùng bởi id

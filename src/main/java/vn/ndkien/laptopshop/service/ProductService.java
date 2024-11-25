@@ -4,6 +4,8 @@ import java.lang.StackWalker.Option;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import jakarta.servlet.http.HttpSession;
@@ -47,8 +49,8 @@ public class ProductService {
     }
 
     // 2. Lấy tất cả sản phẩm
-    public List<Product> getAllProduct() {
-        return this.productRepository.findAll();
+    public Page<Product> getAllProduct(Pageable pageable) {
+        return this.productRepository.findAll(pageable);
     }
 
     // 3. Lấy theo id sản phẩm

@@ -2,6 +2,9 @@ package vn.ndkien.laptopshop.controller.client;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +23,7 @@ import vn.ndkien.laptopshop.service.UserService;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.validation.Valid;
 
@@ -39,9 +43,11 @@ public class HomePageController {
     }
 
     @GetMapping("/")
-    public String getHomePage(Model model) {
-        List<Product> products = this.productService.getAllProduct();
-        model.addAttribute("product1", products);
+    public String getHomePage(Model model, @RequestParam("page") int page) {
+        Pageable pageable = PageRequest.of(page, 3);
+        Page<Product> products = this.productService.getAllProduct(pageable);
+        List<Product> listProducts = products.getContent();
+        model.addAttribute("product1", listProducts);
         return "client/homepage/show";
     }
 

@@ -3,6 +3,9 @@ package vn.ndkien.laptopshop.controller.admin;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,9 +29,23 @@ public class OrderController {
 
     // Xem tất cả đơn hàng
     @GetMapping("/admin/order")
-    public String getDashBoard(Model model, Order order) {
-        List<Order> currentOrder = this.orderService.getAllOrder(order);
-        model.addAttribute("order", currentOrder);
+    public String getDashBoard(Model model, @RequestParam("page") Optional<String> pageOptional) {
+        int page = 1;
+        try {
+            if (pageOptional.isPresent()) {
+                page = Integer.parseInt(pageOptional.get());
+            } else {
+                // page = 1;
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+        Pageable pageable = PageRequest.of(page - 1, 5);
+        Page<Order> currentOrder = this.orderService.getAllOrder(pageable);
+        List<Order> orderList = currentOrder.getContent();
+        model.addAttribute("order", orderList);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", currentOrder.getTotalPages());
         return "admin/order/table-order";
     }
 

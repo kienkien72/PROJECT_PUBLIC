@@ -3,6 +3,9 @@ package vn.ndkien.laptopshop.controller.admin;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -62,9 +65,28 @@ public class ProductController {
 
     // Lấy tất cả sản phẩm
     @GetMapping("/admin/product")
-    public String getProductPage(Model model) {
-        List<Product> products = this.productService.getAllProduct();
-        model.addAttribute("product1", products);
+    public String getProductPage(Model model,
+            @RequestParam("page") Optional<String> pageOptional) {
+        int page = 1;
+        try {
+            // KT có truyền tham số page lên không
+            if (pageOptional.isPresent()) {
+                // Nếu có thì ép kiểu String thành Integer và lấy thông tin
+                page = Integer.parseInt(pageOptional.get());
+            } else {
+                // page =1
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+        // Hàm of cần kiểu dữ liệu integer
+        Pageable pageable = PageRequest.of(page - 1, 5);
+        Page<Product> products = this.productService.getAllProduct(pageable);
+        List<Product> listProduct = products.getContent();
+        model.addAttribute("product1", listProduct);
+
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", products.getTotalPages());
         return "admin/product/table-product";
     }
 
