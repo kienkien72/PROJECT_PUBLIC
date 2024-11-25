@@ -53,6 +53,11 @@ public class ProductService {
         return this.productRepository.findAll(pageable);
     }
 
+    // Lấy tất cả sản phẩm không phân trang
+    public List<Product> fetchProductViewPage() {
+        return this.productRepository.findAll();
+    }
+
     // 3. Lấy theo id sản phẩm
     public Optional<Product> fetchProductById(long id) {
         return this.productRepository.findById(id);

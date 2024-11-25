@@ -63,7 +63,7 @@ public class ProductController {
         return "redirect:/admin/product";
     }
 
-    // Lấy tất cả sản phẩm
+    // Lấy tất cả sản phẩm có phân trang
     @GetMapping("/admin/product")
     public String getProductPage(Model model,
             @RequestParam("page") Optional<String> pageOptional) {

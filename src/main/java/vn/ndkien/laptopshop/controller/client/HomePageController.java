@@ -1,6 +1,7 @@
 package vn.ndkien.laptopshop.controller.client;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -43,11 +44,11 @@ public class HomePageController {
     }
 
     @GetMapping("/")
-    public String getHomePage(Model model, @RequestParam("page") int page) {
-        Pageable pageable = PageRequest.of(page, 3);
-        Page<Product> products = this.productService.getAllProduct(pageable);
-        List<Product> listProducts = products.getContent();
-        model.addAttribute("product1", listProducts);
+    public String getHomePage(Model model) {
+
+        List<Product> products = this.productService.fetchProductViewPage();
+
+        model.addAttribute("product1", products);
         return "client/homepage/show";
     }
 
