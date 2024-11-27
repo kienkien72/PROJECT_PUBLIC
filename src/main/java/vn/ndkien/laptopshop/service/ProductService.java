@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import jakarta.servlet.http.HttpSession;
@@ -14,6 +15,7 @@ import vn.ndkien.laptopshop.domain.CartDetail;
 import vn.ndkien.laptopshop.domain.Order;
 import vn.ndkien.laptopshop.domain.OrderDetail;
 import vn.ndkien.laptopshop.domain.Product;
+import vn.ndkien.laptopshop.domain.Product_;
 import vn.ndkien.laptopshop.domain.User;
 import vn.ndkien.laptopshop.repository.CartDetailRepository;
 import vn.ndkien.laptopshop.repository.CartRepository;
@@ -48,9 +50,13 @@ public class ProductService {
         return this.productRepository.save(product);
     }
 
-    // 2. Lấy tất cả sản phẩm
+    // 2. Lấy tất cả sản phẩm có phân trang
     public Page<Product> getAllProduct(Pageable pageable) {
         return this.productRepository.findAll(pageable);
+    }
+
+    public Page<Product> getAllWithFilter(Pageable pageable, String name) {
+        return this.productRepository.findAll(ProductSpec.nameLike(name), pageable);
     }
 
     // Lấy tất cả sản phẩm không phân trang
