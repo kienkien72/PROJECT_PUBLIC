@@ -67,6 +67,7 @@ public class UserService {
         return user;
     }
 
+    // Kt email có tồn tại hay chưa
     public boolean checkEmailExists(String email) {
         return this.userRepository.existsByEmail(email);
     }

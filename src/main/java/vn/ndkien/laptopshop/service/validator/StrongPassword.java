@@ -9,7 +9,9 @@ import java.lang.annotation.Target;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 
-@Constraint(validatedBy = StrongPasswordValidator.class)
+//Định nghĩa Annotation
+@Constraint(validatedBy = StrongPasswordValidator.class) // Để một annotation hoạt động thì truyền đến một class
+                                                         // StrongPasswordValidator.class
 @Target({ ElementType.METHOD, ElementType.FIELD })
 @Retention(RetentionPolicy.RUNTIME)
 @Documented

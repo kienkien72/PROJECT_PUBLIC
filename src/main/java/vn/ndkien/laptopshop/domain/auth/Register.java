@@ -6,7 +6,7 @@ import jakarta.validation.constraints.Size;
 import vn.ndkien.laptopshop.service.validator.RegisterChecked;
 import vn.ndkien.laptopshop.service.validator.StrongPassword;
 
-@RegisterChecked
+@RegisterChecked // Truyền annotation tự custom tới class
 public class Register {
 
     private String firstName;

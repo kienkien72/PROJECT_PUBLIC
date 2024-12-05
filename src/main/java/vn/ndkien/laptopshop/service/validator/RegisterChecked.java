@@ -9,8 +9,8 @@ import java.lang.annotation.Target;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 
-@Constraint(validatedBy = RegisterValidator.class)
-@Target({ ElementType.TYPE }) // Adjusted to apply to the class level
+@Constraint(validatedBy = RegisterValidator.class) // Để một annotation hoạt động thì truyền đến một class
+@Target({ ElementType.TYPE }) // Phạm vi hoạt động là một class
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface RegisterChecked {

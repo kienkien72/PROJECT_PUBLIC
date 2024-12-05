@@ -18,7 +18,6 @@ import vn.ndkien.laptopshop.domain.CartDetail;
 import vn.ndkien.laptopshop.domain.Product;
 import vn.ndkien.laptopshop.domain.User;
 import vn.ndkien.laptopshop.domain.auth.Register;
-
 import vn.ndkien.laptopshop.service.ProductService;
 import vn.ndkien.laptopshop.service.UserService;
 
@@ -62,10 +61,7 @@ public class HomePageController {
     public String handleRegister(@ModelAttribute("registerUser") @Valid Register register,
             BindingResult bindingResult) {
 
-        // List<FieldError> errors = bindingResult.getFieldErrors();
-        // for (FieldError error : errors) {
-        // System.out.println(error.getField() + " - " + error.getDefaultMessage());
-        // }
+        // Validate
         if (bindingResult.hasErrors()) {
             return "client/auth/register";
         }
