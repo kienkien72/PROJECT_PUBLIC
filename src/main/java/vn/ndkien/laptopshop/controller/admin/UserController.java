@@ -104,7 +104,7 @@ public class UserController {
             @ModelAttribute("newUser") @Valid User ndkien,
             BindingResult newUserBindingResult,
             @RequestParam("fileImage") MultipartFile file) {
-
+        // BindingResult phải ngay sau Valid
         // Validate data (Xử lí dữ liệu hợp lệ)
         // List<FieldError> errors = newUserBindingResult.getFieldErrors();
         // for (FieldError error : errors) {

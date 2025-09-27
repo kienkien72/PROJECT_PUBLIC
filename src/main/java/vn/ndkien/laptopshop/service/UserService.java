@@ -16,10 +16,10 @@ import vn.ndkien.laptopshop.repository.UserRepository;
 
 @Service
 public class UserService {
-    private UserRepository userRepository;
-    private RoleRepository roleRepository;
-    private ProductRepository productRepository;
-    private OrderRepository orderRepository;
+    private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
+    private final ProductRepository productRepository;
+    private final OrderRepository orderRepository;
 
     // Constructor
     public UserService(UserRepository userRepository, RoleRepository roleRepository,

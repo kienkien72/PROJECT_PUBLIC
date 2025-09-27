@@ -1,6 +1,5 @@
 package vn.ndkien.laptopshop.service;
 
-import java.lang.StackWalker.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,13 +14,13 @@ import vn.ndkien.laptopshop.domain.CartDetail;
 import vn.ndkien.laptopshop.domain.Order;
 import vn.ndkien.laptopshop.domain.OrderDetail;
 import vn.ndkien.laptopshop.domain.Product;
-import vn.ndkien.laptopshop.domain.Product_;
 import vn.ndkien.laptopshop.domain.User;
 import vn.ndkien.laptopshop.repository.CartDetailRepository;
 import vn.ndkien.laptopshop.repository.CartRepository;
 import vn.ndkien.laptopshop.repository.OrderDetailRepository;
 import vn.ndkien.laptopshop.repository.OrderRepository;
 import vn.ndkien.laptopshop.repository.ProductRepository;
+import vn.ndkien.laptopshop.service.specification.ProductSpec;
 
 @Service
 public class ProductService {
@@ -55,8 +54,46 @@ public class ProductService {
         return this.productRepository.findAll(pageable);
     }
 
-    public Page<Product> getAllWithFilter(Pageable pageable, String name) {
-        return this.productRepository.findAll(ProductSpec.nameLike(name), pageable);
+    // public Page<Product> getAllWithFilter(Pageable pageable, String name) {
+    // return this.productRepository.findAll(ProductSpec.nameLike(name), pageable);
+    // }
+
+    // case 1
+    // public Page<Product> getAllWithFilter(Pageable pageable, double price) {
+    // return this.productRepository.findAll(ProductSpec.priceLike(price),
+    // pageable);
+    // }
+
+    // case 2
+    // public Page<Product> getAllWithFilter(Pageable pageable, double price) {
+    // return this.productRepository.findAll(ProductSpec.maxLike(price), pageable);
+    // }
+
+    // case 3
+    // public Page<Product> getAllWithFilter(Pageable pageable, String name) {
+    // return this.productRepository.findAll(ProductSpec.factoryLike(name),
+    // pageable);
+    // }
+
+    // case 4
+    // public Page<Product> getAllWithFilter(Pageable pageable, List<String> name) {
+    // return this.productRepository.findAll(ProductSpec.listFactoryLike(name),
+    // pageable);
+    // }
+
+    // case 5
+    public Page<Product> getAllWithFilter(Pageable pageable, String price) {
+        if (price.equals("10-toi-15-trieu")) {
+            double min = 10000000;
+            double max = 15000000;
+            return this.productRepository.findAll(ProductSpec.matchPrice(min, max), pageable);
+        } else if (price.equals("15-toi-30-trieu")) {
+            double min = 15000000;
+            double max = 30000000;
+            return this.productRepository.findAll(ProductSpec.matchPrice(min, max), pageable);
+        } else {
+            return this.productRepository.findAll(pageable);
+        }
     }
 
     // Lấy tất cả sản phẩm không phân trang
@@ -81,11 +118,12 @@ public class ProductService {
 
         // check user đã có Cart chưa ? Nếu chưa => tạo mới
         if (user != null) {
+            // Kt người dùng đã có giỏ hàng hay chưa
             Cart cart = this.cartRepository.findByUser(user);
 
             // Tạo mới cart(giỏ hàng)
             if (cart == null) {
-                Cart otherCart = new Cart();
+                Cart otherCart = new Cart(); // Tạo giỏ hàng
                 otherCart.setUser(user);
                 otherCart.setSum(0);
 
@@ -101,9 +139,10 @@ public class ProductService {
             // KT có tồn tại hay không
             if (product.isPresent()) {
 
-                // Trong method Optional dùng phương thức .get() để lấy dữ liệu
+                // Trong method Optional dùng phương thức .get() để lấy thông tin sản phẩm
                 Product realProduct = product.get();
 
+                // Kiểm tra sản phẩm đã có trong giỏ hàng chưa
                 CartDetail oldDetail = this.cartDetailRepository.findByCartAndProduct(cart, realProduct);
                 // Tạo mới cartDetail
                 if (oldDetail == null) {
@@ -120,6 +159,8 @@ public class ProductService {
                     session.setAttribute("sum", s); // Cập nhật số lượng giỏ hàng
                     this.cartRepository.save(cart); // Lưu vào giỏ hàng
 
+                    // Nếu sản phẩm đã có trong giỏ hàng, cập nhật số lượng bằng cách cộng thêm số
+                    // lượng mới
                 } else {
                     oldDetail.setQuantity(oldDetail.getQuantity() + quantity);
                     this.cartDetailRepository.save(oldDetail);

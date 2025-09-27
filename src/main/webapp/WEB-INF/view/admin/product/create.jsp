@@ -52,7 +52,7 @@
                                 <div class=" mt-5">
                                     <div class="row">
                                         <div class="col-md-6 col-12 mx-auto">
-                                            <h3>Update a product</h3>
+                                            <h3>Create a product</h3>
                                             <hr />
                                             <form:form method="post" action="/admin/product/create" class="row"
                                                 enctype="multipart/form-data" modelAttribute="newProduct">

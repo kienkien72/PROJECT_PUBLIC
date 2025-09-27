@@ -13,11 +13,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import vn.ndkien.laptopshop.domain.Order;
-import vn.ndkien.laptopshop.domain.OrderDetail;
+
 import vn.ndkien.laptopshop.service.OrderService;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class OrderController {
@@ -73,7 +72,7 @@ public class OrderController {
         return "redirect:/admin/order";
     }
 
-    // Lấy thông tin cần sửa
+    // Lấy thông tin cần xoá
     @GetMapping("/admin/order/delete/{id}")
     public String getDeleteOrder(@PathVariable long id, Model model) {
         Optional<Order> currentOrder = this.orderService.getOrderById(id);

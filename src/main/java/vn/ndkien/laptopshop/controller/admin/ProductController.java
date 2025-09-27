@@ -14,13 +14,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-
 import jakarta.validation.Valid;
 import vn.ndkien.laptopshop.domain.Product;
-import vn.ndkien.laptopshop.domain.User;
 import vn.ndkien.laptopshop.service.ProductService;
 import vn.ndkien.laptopshop.service.UploadService;
 
@@ -99,6 +97,7 @@ public class ProductController {
         return "admin/product/show";
     }
 
+    // Update sản phẩm
     @GetMapping("/admin/product/update/{id}")
     public String getUpdateProductPage(Model model, @PathVariable long id) {
         Optional<Product> currentProduct = this.productService.fetchProductById(id);
@@ -138,6 +137,7 @@ public class ProductController {
         return "redirect:/admin/product";
     }
 
+    // Xoá sản phẩm
     @GetMapping("/admin/product/delete/{id}")
     public String deleteProductId(Model model, @PathVariable long id) {
         model.addAttribute("product", new Product());

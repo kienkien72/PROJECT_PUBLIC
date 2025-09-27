@@ -25,6 +25,7 @@ public class CustomHandlerRole implements AuthenticationSuccessHandler {
     @Autowired
     private UserService userService;
 
+    // Xác định URL chuyển hướng sau khi đăng nhập
     protected String determineTargetUrl(final Authentication authentication) {
 
         Map<String, String> roleTargetUrlMap = new HashMap<>();
@@ -42,12 +43,15 @@ public class CustomHandlerRole implements AuthenticationSuccessHandler {
         throw new IllegalStateException();
     }
 
+    // Xóa lỗi xác thực và lưu thông tin vào session
     protected void clearAuthenticationAttributes(HttpServletRequest request, Authentication authentication) {
         HttpSession session = request.getSession(false);
         if (session == null) {
             return;
         }
         session.removeAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
+
+        // Lấy thông tin người dùng và lưu vào session
         // get email
         String email = authentication.getName();
 
@@ -64,6 +68,7 @@ public class CustomHandlerRole implements AuthenticationSuccessHandler {
 
     }
 
+    // Xử lý chuyển hướng sau khi đăng nhập thành công
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
     @Override

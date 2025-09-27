@@ -1,6 +1,7 @@
 package vn.ndkien.laptopshop.controller.client;
 
 import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -25,7 +26,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class ItemController {
@@ -105,6 +105,7 @@ public class ItemController {
         for (CartDetail cd : cartDetails) {
             totalPrice += cd.getPrice() * cd.getQuantity();
         }
+
         model.addAttribute("cartDetail", cartDetails);
         model.addAttribute("totalPrice", totalPrice);
         return "client/cart/checkout";
@@ -173,7 +174,10 @@ public class ItemController {
     public String getProductPage(Model model,
             @RequestParam("page") Optional<String> pageOptional,
             @RequestParam("name") Optional<String> nameOptional,
-            @RequestParam("min-price") Optional<String> priceOptional) {
+            @RequestParam("min-price") Optional<String> minOptional,
+            @RequestParam("max-price") Optional<String> maxOptional,
+            @RequestParam("factory") Optional<String> factoryOptional,
+            @RequestParam("price") Optional<String> priceOptional) {
         int page = 1;
         try {
             if (pageOptional.isPresent()) {
@@ -186,10 +190,35 @@ public class ItemController {
             // page = 1
             // TODO: handle exception
         }
-        String name = nameOptional.isPresent() ? nameOptional.get() : " ";
-        String minPrice = priceOptional.isPresent() ? priceOptional.get() : " ";
+
         Pageable pageable = PageRequest.of(page - 1, 6);
-        Page<Product> prs = this.productService.getAllWithFilter(pageable, name);
+
+        // String name = nameOptional.isPresent() ? nameOptional.get() : " ";
+        // Page<Product> prs = this.productService.getAllWithFilter(pageable, name);
+
+        // case 1
+        // double min = minOptional.isPresent() ? Double.parseDouble(minOptional.get())
+        // : 0;
+        // Page<Product> prs = this.productService.getAllWithFilter(pageable, min);
+
+        // case 2
+        // double max = maxOptional.isPresent() ? Double.parseDouble(maxOptional.get())
+        // : 0;
+        // Page<Product> prs = this.productService.getAllWithFilter(pageable, max);
+
+        // case 3
+        // String factory = factoryOptional.isPresent() ? factoryOptional.get() : "not
+        // found";
+        // Page<Product> prs = this.productService.getAllWithFilter(pageable, factory);
+
+        // case 4
+        // List<String> factory = Arrays.asList(factoryOptional.get().split(","));
+        // Page<Product> prs = this.productService.getAllWithFilter(pageable,factory);
+
+        // case 5
+        String price = priceOptional.isPresent() ? (priceOptional.get()) : "0";
+        Page<Product> prs = this.productService.getAllWithFilter(pageable, price);
+
         List<Product> products = prs.getContent();
         model.addAttribute("products", products);
         model.addAttribute("currentPage", page);
