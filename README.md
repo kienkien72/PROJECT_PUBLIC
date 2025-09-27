@@ -11,7 +11,7 @@ Hệ thống được thiết kế để quản lý **Người dùng, Sản ph�
 - Hỗ trợ chức năng đăng ký/đăng nhập, giỏ hàng và thanh toán
 
 ## Công nghệ sử dụng
-- **Backend:** Java, Spring Boot, Spring Security, RESTful API  
+- **Backend:** Java, Spring Boot, Spring Security, REST API  
 - **Frontend:** JSP, Bootstrap  
 - **Database:** MySQL  
 
@@ -36,7 +36,7 @@ Hệ thống được thiết kế để quản lý **Người dùng, Sản ph�
   - **Đăng ký/Đăng nhập** 
 
 ## Hướng dẫn chạy dự án
-1. Clone repository:
-```bash
-git clone https://github.com/kienkien72/Spring-MVC.git
+1. Clone repository : git clone https://github.com/kienkien72/Spring-MVC.git
+2. Chạy backend: ./mvnw spring-boot:run
+3. Truy cập : http://localhost:8080
 
