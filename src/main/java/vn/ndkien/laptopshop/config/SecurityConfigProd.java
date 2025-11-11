@@ -25,7 +25,8 @@ public class SecurityConfigProd {
                 .requestMatchers("/", "/register", "/product/**", "/login",
                     "/client/**", "/css/**", "/js/**", "/images/**",
                     "/health", "/health.json", "/ping",
-                    "/actuator/health", "/actuator/info")
+                    "/actuator/health", "/actuator/info",
+                    "/test/**")
                 .permitAll()
                 .requestMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated()

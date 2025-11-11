@@ -3,6 +3,7 @@ package vn.ndkien.laptopshop.config;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -20,7 +21,7 @@ public class NoDatabaseConfig {
         UserDetails admin = User.builder()
                 .username("admin@admin.com")
                 .password("$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi") // 123456
-                .roles("ADMIN")
+                .authorities(new SimpleGrantedAuthority("ROLE_ADMIN"))
                 .build();
 
         return new InMemoryUserDetailsManager(admin);
