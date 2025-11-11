@@ -18,9 +18,4 @@ public class HealthController {
     public ResponseEntity<String> ping() {
         return ResponseEntity.ok("pong");
     }
-
-    @GetMapping("/")
-    public ResponseEntity<String> home() {
-        return ResponseEntity.ok("Laptop Shop API - Running");
-    }
 }
