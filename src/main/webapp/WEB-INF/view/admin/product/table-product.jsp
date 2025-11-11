@@ -78,6 +78,7 @@
                                                             </td>
                                                         </tr>
                                                     </c:forEach>
+                                                    </c:if>
                                                 </tbody>
                                             </table>
                                             <nav aria-label="Page navigation example">
@@ -97,6 +98,7 @@
                                                             </a>
                                                         </li>
                                                     </c:forEach>
+                                                    </c:if>
 
 
                                                     <li class="page-item">

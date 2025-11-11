@@ -72,6 +72,7 @@
                                                         </td>
                                                     </tr>
                                                 </c:forEach>
+                                                    </c:if>
                                             </tbody>
                                         </table>
                                         <nav aria-label="Page navigation example">
@@ -91,6 +92,7 @@
                                                         </a>
                                                     </li>
                                                 </c:forEach>
+                                                    </c:if>
                                                 <li class="page-item">
                                                     <a class="${currentPage eq totalPages ? 'disabled page-link' : 'page-link'}"
                                                         href="/admin/user?page=${currentPage + 1}" aria-label="Next">

@@ -212,6 +212,7 @@
                                                     </div>
                                                 </div>
                                             </c:forEach>
+                                                    </c:if>
                                             <div class="pagination d-flex justify-content-center mt-5">
                                                 <li class="page-item">
                                                     <a class="${1 eq currentPage ? 'disabled page-link' : 'page-link'}"
@@ -227,6 +228,7 @@
                                                         </a>
                                                     </li>
                                                 </c:forEach>
+                                                    </c:if>
                                                 <li class="page-item">
                                                     <a class="${totalPages eq currentPage ? 'disabled page-link' : 'page-link'}"
                                                         href="/products?page=${currentPage + 1}" aria-label="Next">

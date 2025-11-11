@@ -7,19 +7,16 @@ WORKDIR /app
 COPY pom.xml .
 
 # Download dependencies
-RUN mvn dependency:go-offline -B
+RUN mvn dependency:go-offline -B || mvn dependency:resolve -B
 
 # Copy source code
 COPY src ./src
 
 # Build the application
-RUN mvn clean package -DskipTests
+RUN mvn clean package -DskipTests -Dmaven.test.skip=true
 
 # Use smaller runtime image
 FROM openjdk:17-jre-slim
-
-# Install MySQL client for health checks
-RUN apt-get update && apt-get install -y mysql-client && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
@@ -34,9 +31,8 @@ USER spring
 # Expose port
 EXPOSE 8080
 
-# Health check
-HEALTHCHECK --interval=30s --timeout=3s --start-period=60s --retries=3 \
-  CMD mysqladmin ping -h"$DATABASE_HOST" -u"$DATABASE_USERNAME" -p"$DATABASE_PASSWORD" --silent || exit 1
+# Add JVM options for better memory management
+ENV JAVA_OPTS="-Xmx512m -Xms256m"
 
 # Start the application
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar app.jar"]
