@@ -21,16 +21,22 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     // Hàm trả ra là UserDetail =>Phải dùng User của security
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        // Import trực tiếp để tránh bị trùng User của security
-        vn.ndkien.laptopshop.domain.User user = this.userService.getUserByEmail(username);
-        if (user == null) {
-            throw new UsernameNotFoundException("Người dùng không tồn tại");
-        }
+        try {
+            // Import trực tiếp để tránh bị trùng User của security
+            vn.ndkien.laptopshop.domain.User user = this.userService.getUserByEmail(username);
+            if (user == null) {
+                throw new UsernameNotFoundException("Người dùng không tồn tại");
+            }
 
-        return new User(
-                user.getEmail(),
-                user.getPassword(),
-                Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + user.getRole().getName())));
+            return new User(
+                    user.getEmail(),
+                    user.getPassword(),
+                    Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + user.getRole().getName())));
+        } catch (Exception e) {
+            // If database is not available or any other error, throw user not found
+            // This allows the in-memory authentication to work as fallback
+            throw new UsernameNotFoundException("User not found: " + username);
+        }
 
     }
 
