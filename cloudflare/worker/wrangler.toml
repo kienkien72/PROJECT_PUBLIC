@@ -1,0 +1,27 @@
+name = "laptopshop-api"
+main = "src/index.js"
+compatibility_date = "2024-01-01"
+compatibility_flags = ["nodejs_compat"]
+
+# D1 Database Binding
+[[d1_databases]]
+binding = "DB"
+database_name = "laptopshop-db"
+database_id = ""  # Will be filled after database creation
+
+# R2 Bucket for file uploads
+[[r2_buckets]]
+binding = "UPLOADS"
+bucket_name = "laptopshop-uploads"
+
+# Environment variables
+[vars]
+ENVIRONMENT = "production"
+CORS_ORIGIN = "*"
+JWT_SECRET = "your-super-secret-jwt-key-change-this"
+UPLOAD_SIZE_LIMIT = "52428800"  # 50MB in bytes
+
+# KV for session storage
+[[kv_namespaces]]
+binding = "SESSIONS"
+id = "sessions-kv-namespace-id"  # Will be filled after KV creation

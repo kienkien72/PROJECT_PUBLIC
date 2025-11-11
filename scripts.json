@@ -1,0 +1,25 @@
+{
+  "name": "laptopshop",
+  "version": "1.0.0",
+  "description": "E-commerce platform for laptop shop",
+  "scripts": {
+    "dev": "./mvnw spring-boot:run",
+    "start": "./mvnw spring-boot:run",
+    "build": "./mvnw clean package",
+    "build:prod": "./mvnw clean package -DskipTests",
+    "test": "./mvnw test",
+    "clean": "./mvnw clean",
+    "setup": "chmod +x scripts/*.sh && ./scripts/setup.sh",
+    "docker:build": "./scripts/docker-build.sh",
+    "docker:run": "./scripts/docker-run.sh"
+  },
+  "ports": {
+    "frontend": 8080,
+    "database": 3306
+  },
+  "database": {
+    "name": "laptopshop",
+    "username": "root",
+    "password": "123456"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "name": "laptopshop-api",
+  "version": "1.0.0",
+  "description": "Laptop Shop API on Cloudflare Workers",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "tail": "wrangler tail",
+    "db:init": "wrangler d1 execute laptopshop-db --file=../database/schema.sql",
+    "db:query": "wrangler d1 execute laptopshop-db --command",
+    "db:migrate": "wrangler d1 migrations apply laptopshop-db --remote"
+  },
+  "dependencies": {
+    "itty-router": "^4.0.25",
+    "@cloudflare/workers-types": "^4.20231218.0"
+  },
+  "devDependencies": {
+    "wrangler": "^3.22.4"
+  },
+  "author": "",
+  "license": "MIT"
+}

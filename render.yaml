@@ -1,0 +1,24 @@
+services:
+  # Spring Boot Application
+  - type: web
+    name: laptopshop
+    env: docker
+    dockerfilePath: ./Dockerfile
+    plan: free
+    healthCheckPath: /
+    envVars:
+      - key: SPRING_DATASOURCE_URL
+        fromDatabase:
+          name: laptopshop-db
+          property: connectionString
+      - key: SPRING_JPA_HIBERNATE_DDL_AUTO
+        value: update
+      - key: SERVER_PORT
+        value: 10000
+
+  # PostgreSQL Database
+  - type: pserv
+    name: laptopshop-db
+    plan: free
+    databaseName: laptopshop
+    user: laptopshop
