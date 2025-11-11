@@ -3,11 +3,11 @@ builder = "NIXPACKS"
 
 [deploy]
 healthcheckPath = "/ping"
-healthcheckTimeout = 30000
+healthcheckTimeout = 120000
 restartPolicyType = "on_failure"
 restartPolicyMaxRetries = 10
 
-startCommand = "java -jar target/laptopshop-0.0.1-SNAPSHOT.jar --spring.profiles.active=prod"
+startCommand = "java -Xms256m -Xmx512m -XX:+UseG1GC -XX:+UseContainerSupport -XX:MaxRAMPercentage=75.0 -jar target/laptopshop-0.0.1-SNAPSHOT.jar --spring.profiles.active=prod"
 
 [[services]]
 name = "app"
