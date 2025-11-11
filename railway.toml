@@ -2,7 +2,7 @@
 builder = "NIXPACKS"
 
 [deploy]
-healthcheckPath = "/ping"
+healthcheckPath = "/actuator/health"
 healthcheckTimeout = 120000
 restartPolicyType = "on_failure"
 restartPolicyMaxRetries = 10
