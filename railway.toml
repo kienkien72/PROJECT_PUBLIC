@@ -2,10 +2,11 @@
 builder = "NIXPACKS"
 
 [deploy]
-healthcheckPath = "/"
-healthcheckTimeout = 100
+healthcheckPath = "/health"
+healthcheckTimeout = 60000
 restartPolicyType = "on_failure"
-restartPolicyMaxRetries = 10
+restartPolicyMaxRetries = 3
+startCommand = "java -jar target/laptopshop-0.0.1-SNAPSHOT.jar --spring.profiles.active=prod"
 
 [[services]]
 name = "app"
