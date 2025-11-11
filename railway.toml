@@ -2,7 +2,7 @@
 builder = "NIXPACKS"
 
 [deploy]
-healthcheckPath = "/health"
+healthcheckPath = "/ping"
 healthcheckTimeout = 30000
 restartPolicyType = "on_failure"
 restartPolicyMaxRetries = 10
