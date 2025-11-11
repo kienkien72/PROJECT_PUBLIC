@@ -19,32 +19,10 @@ public class SecurityConfigProd {
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests(authorize -> authorize
-                .dispatcherTypeMatchers(DispatcherType.FORWARD, DispatcherType.INCLUDE)
-                .permitAll()
-                .requestMatchers("/", "/register", "/product/**", "/login",
-                    "/client/**", "/css/**", "/js/**", "/images/**",
-                    "/health", "/health.json", "/ping",
-                    "/actuator/health", "/actuator/info")
-                .permitAll()
-                .requestMatchers("/admin/**").hasRole("ADMIN")
-                .anyRequest().authenticated()
+                .anyRequest().permitAll()
             )
-            .sessionManagement(session -> session
-                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
-                .maximumSessions(10)
-                .maxSessionsPreventsLogin(false)
-            )
-            .formLogin(form -> form
-                .loginPage("/login")
-                .failureUrl("/login?error")
-                .permitAll()
-            )
-            .logout(logout -> logout
-                .logoutSuccessUrl("/login?logout")
-                .deleteCookies("JSESSIONID")
-                .invalidateHttpSession(true)
-            )
-            .csrf(csrf -> csrf.disable()); // Temporarily disable for production
+            .csrf(csrf -> csrf.disable())
+            .headers(headers -> headers.frameOptions().disable());
 
         return http.build();
     }
